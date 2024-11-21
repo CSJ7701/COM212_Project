@@ -70,31 +70,31 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
       - This can be done online on Github.com
         
 *** Clone the repo locally
-      #+begin_export shell
+      #+begin_src shell
       git clone https://github.com/{OWNERS_USERNAME}/{NAME_OF_REPO}.git
 
       # To clone this repo:
       git clone https://github.com/CSJ7701/COM212_Project.git
-      #+end_export
+      #+end_src
       - This will create the project directory under your current working directory.
 
-      #+begin_export shell
+      #+begin_src shell
       PWD
-      #+end_export
+      #+end_src
       #+RESULT: /home/test_user
 
-      #+begin_export shell
+      #+begin_src shell
       mkdir MyTestProject
       cd MyTestProject
       touch Test.txt
       echo "This is text that will go into Test.txt" > ./Test.txt
-      #+end_export
+      #+end_src
 
 *** Check its status with `git status`.
 - After you create Test.txt and make a change to it, you should see something similar to this:
-#+begin_export shell
+#+begin_src shell
 git status
-#+end_export
+#+end_src
 #+RESULTS:
 : On branch main
 : Your branch is up to date with 'origin/main'.
@@ -106,27 +106,27 @@ git status
 : no changes added to commit (use "git add" and/or "git commit -a")
 
 *** Stage it for commit using `git add <file>`.
-#+begin_export shell
+#+begin_src shell
 git add Test.txt
 # To add all files in the current working directory, use 'git add .'
-#+end_export
+#+end_src
 
 *** Commit the changes with a message using `git commit -m "<message>"`.
-#+begin_export shell
+#+begin_src shell
 git commit -m "Updated Test.txt"
-#+end_export
+#+end_src
 
 *** If collaborators make changes on GitHub, use `git pull` to fetch and merge their updates.
 - You should pull often.
 - I usually pull once, before I begin working on something in a project, and then again before I push my changes
-  #+begin_export shell
+  #+begin_src shell
 git pull
-  #+end_export
+  #+end_src
 
 *** Push your changes to GitHub using `git push`.
-#+begin_export shell
+#+begin_src shell
 git push
-#+end_export
+#+end_src
 
 *** Admin Stuff
 You will need to update your name and email on your local git setup.
