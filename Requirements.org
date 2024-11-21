@@ -1,0 +1,67 @@
+* Project Overview
+This system will manage student records and ideas for our 'think tank program'. Students will be paid to generate ideas, and these ideas will be curated, stored, and sold to solve major societal problems. The system must be efficient, user-friendly, visually appealing, and reliable.
+
+* Functional Requirements
+** Student Records
+- Each record will store:
+  - Last name
+  - Email login name
+  - Four-digit SSN (used as the primary key)
+  - Four-digit student number
+  - The last 10 ideas submitted by the student
+  - Average rating of the last 10 ideas
+
+- Features:
+  1. Retrieve a student record by SSN in *O(1)* average time.
+  2. Display last name, email, SSN, average idea score, and access to the last 10 ideas.
+  3. Add new records.
+  4. Modify last name and email for existing records.
+  5. Delete student records.
+  6. Add new ideas to a student’s record, automatically updating the last 10 ideas (FIFO).
+
+** Ideas
+- Each idea will have:
+  - Unique idea number (auto-incremented starting from 1)
+  - Submitter’s SSN
+  - Short description (minimum 20 characters)
+  - Rating (0–100)
+
+- Features:
+  1. Store a maximum of 511 ideas ready for sale, accessible as follows:
+     - Retrieve the best idea in *O(1)* time.
+     - Add or remove ideas from the pool in *O(log n)* time.
+  2. Ensure student records maintain up to the last 10 ideas, even after ideas are removed from the sale pool.
+  3. Maintain a separate list of all ideas ever entered:
+     - Support search by idea number.
+     - Support deletion of ideas from this list (without affecting other structures).
+
+** Additional Features
+- Retrieve a student’s email login name using their student number in *O(1)* average time.
+- Print a list of students (number, name, SSN, average score) ordered by student number in *O(n)* time.
+- Save all data to persistent storage and reload it on startup.
+
+* Extra Credit (+5)
+- Maintain a comprehensive list of all submitted ideas.
+- Search and delete ideas from this list without affecting other data structures.
+
+* Technical Requirements
+- Data must persist between system restarts using serialization or text files.
+- The system must handle data efficiently and ensure correctness across operations.
+
+* Users' Manual
+** Main Functions
+1. *Add New Student Record*: Enter a student’s last name, email, SSN, and student number to add a new record.
+2. *View Student Record*: Search using SSN to display the student’s information and their last 10 ideas.
+3. *Modify Student Record*: Select a record and update the last name or email.
+4. *Delete Student Record*: Remove a record by SSN.
+5. *Add Idea*: Enter a student’s SSN, the idea description, and its rating. The system will assign a unique idea number and update the student’s record.
+6. *Access Best Idea*: Retrieve the best idea from the pool in constant time.
+7. *Sell Best Idea*: Remove the best idea from the pool, but keep it in the student’s record and the historical list.
+8. *Search Idea History*: Look up any idea by its unique idea number.
+9. *Delete Idea from History*: Remove an idea from the historical list (does not affect other structures).
+10. *View Students by Number*: Display a sorted list of students by student number.
+
+* Presentation and Submission Details
+- **Presentation Date**: 10 May
+  - All team members must attend and speak during the presentation.
+- **Final Program Submission**: Due by the end of finals period. Submit all program files and documentation.
