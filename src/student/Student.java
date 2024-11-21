@@ -1,6 +1,5 @@
 package student;
 
-import idea.Idea;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

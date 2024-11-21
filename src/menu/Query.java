@@ -38,8 +38,23 @@ public class Query {
 		try {
 		    Field field = target.getClass().getDeclaredField(attribute);
 		    field.setAccessible(true);
-		    field.set(target, input);
+
+		    Class<?> fieldType = field.getType();
+
+		    Object value;
+		    if (fieldType == int.class) {
+			value = Integer.parseInt(input);
+		    } else if (fieldType == double.class) {
+			value = Double.parseDouble(input);
+		    } else if (fieldType == boolean.class) {
+			value = Boolean.parseBoolean(input);
+		    } else {
+			value = input;
+		    }
+
+		    field.set(this.target, value);
 		    break;
+		    
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 		    System.out.println("Error setting field: " + e.getMessage());
 		    break;
@@ -55,7 +70,21 @@ public class Query {
 	    try {
 		Field field = target.getClass().getDeclaredField(attribute);
 		field.setAccessible(true);
-		field.set(target, input);
+
+		Class<?> fieldType = field.getType();
+		
+		Object value;
+		if (fieldType == int.class) {
+		    value = Integer.parseInt(input);
+		} else if (fieldType == double.class) {
+		    value = Double.parseDouble(input);
+		} else if (fieldType == boolean.class) {
+		    value = Boolean.parseBoolean(input);
+		} else {
+		    value = input;
+		}
+
+		field.set(this.target, value);
 		return true;
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 		System.out.println("Error setting field: " + e.getMessage());

@@ -17,6 +17,8 @@ public class AddStudentMenu extends Menu {
 	this.student = new Student();
 	addItem("Name: ", this.student, "name");
 	addItem("Email: ", this.student, "email");
+	addItem("SSN: ", this.student, "SSN");
+	addItem("Student ID: ", this.student, "ID");
     }
 
     // Most methods will remain the same.
