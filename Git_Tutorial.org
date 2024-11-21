@@ -1,0 +1,101 @@
+* Git and GitHub: A Basic Tutorial
+** Introduction
+Git is a version control system that tracks changes to files in a project. The main benefits to this are collaboration and history tracking.
+GitHub is a cloud-based platform that hosts Git repositories, enabling remote collaboration.
+
+** Where Files Are Stored
+   - *Local Files*:  
+     Your working directory contains files you are actively editing.
+     These are normal files on your computer, like =heap.java=, =TestFile.py=, etc.
+   - *.git Repository*:  
+     A hidden folder (`.git`) in your project directory where Git stores information about your project's history (commits, branches, etc.).
+     You will /almost never/ interact with this folder directly.
+     This is also known as your 'local repository'.
+   - *GitHub Cloud Storage*:  
+     A remote repository hosted on GitHub, which can sync with your `.git` repo for backup and collaboration.
+
+
+   _NOTE:_ while the '.git' folder contains information about the content, history, revisions, and structure of the files in your project, it is useless without the files themselves.
+   The way git actually works is it tracks /changes/, meaning that a file has to be present, with the content that Git (the program) /expects/ to be there in order for changes to properly apply. This sounds confusing, but it makes more sense once you use Git more often.
+
+   The key takeaway is that you can cause problems if you forget to make sure that your files are properly updated before making a change. We'll go over this more in a bit.
+
+** Basic Git Commands
+   - *`git status`*
+     Displays the state of your working directory and staging area.  
+     Shows:
+     - Tracked and untracked files.
+     - Files staged for commit.
+
+   - *`git add <file>`*
+     Adds changes in a file to the staging area, preparing it for the next commit.
+     - Interaction: Moves files from the working directory to the staging area.
+
+     Files must be 'staged' in order for git to track them. If you create a new file and make changes to it, but forget to tell git to track that file, it will not be added to your repository.
+
+   - *`git rm <file>`*
+     Removes a file from the working directory and the staging area.
+     - Interaction: Deletes a file locally and schedules the removal for the next commit.
+
+     This will delete the actual file from your local file system, /AND/ remove the file from Git.
+
+   - *`git rm --cached <file>`*
+     Removes a file from the staging area
+
+     This will /not/ delete the actual file from your local file system, it will /only/ remove the file from Git.
+
+   - *`git commit -m "<message>"`*
+     Saves the staged changes to the local `.git` repository with a descriptive message.
+     - Interaction: Records a snapshot of the current staging area to the repository.
+
+   - *`git push`*
+     Sends your local commits to a remote repository (e.g., GitHub).
+     - Interaction: Updates the GitHub repository with your changes from the local `.git` repository.
+
+   - *`git pull`*
+     Fetches and integrates changes from the remote repository into your local repository and working directory.
+     - Interaction: Merges updates from GitHub into your local `.git` repository and working directory.
+
+** How These Commands Interact with File Locations
+   1. *Local Files to .git Repo*:  
+      - Use `git add` to stage changes.  
+      - Use `git commit` to save staged changes to the `.git` repository.
+   2. *.git Repo to GitHub*:  
+      - Use `git push` to upload commits to GitHub.
+   3. *GitHub to Local*:  
+      - Use `git pull` to fetch and merge updates from GitHub.
+
+** Workflow Example
+   1. Create a git repo
+      - This can be done online on Github.com
+        
+   2. Clone the repo locally
+      #+begin_export shell
+      git clone https://github.com/{OWNERS_USERNAME}/{NAME_OF_REPO}.git
+
+      # To clone this repo:
+      git clone https://github.com/CSJ7701/COM212_Project.git
+      #+end_export
+      - This will create the project directory under your current working directory.
+
+      #+begin_export shell
+      PWD
+      #+end_export
+      #+RESULT: /home/test_user
+
+      #+begin_export shell
+      mkdir MyTestProject
+      cd MyTestProject
+      touch Test.txt
+      echo "This is text that will go into Test.txt" > ./Test.txt
+      #+end_export
+
+   4. Check its status with `git status`.  
+   5. Stage it for commit using `git add <file>`.  
+   6. Commit the changes with a message using `git commit -m "<message>"`.  
+   7. Push your changes to GitHub using `git push`.  
+   8. If collaborators make changes on GitHub, use `git pull` to fetch and merge their updates.
+
+** Summary
+Git allows you to manage file versions locally and collaborate remotely via GitHub. Using `git status`, `git add`, `git rm`, `git commit`, `git push`, and `git pull`, you can efficiently manage and share changes across different locations.
+
