@@ -66,10 +66,10 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
       - Use `git pull` to fetch and merge updates from GitHub.
 
 ** Workflow Example
-   1. Create a git repo
+*** Create a git repo
       - This can be done online on Github.com
         
-   2. Clone the repo locally
+*** Clone the repo locally
       #+begin_export shell
       git clone https://github.com/{OWNERS_USERNAME}/{NAME_OF_REPO}.git
 
@@ -90,12 +90,51 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
       echo "This is text that will go into Test.txt" > ./Test.txt
       #+end_export
 
-   4. Check its status with `git status`.  
-   5. Stage it for commit using `git add <file>`.  
-   6. Commit the changes with a message using `git commit -m "<message>"`.  
-   7. Push your changes to GitHub using `git push`.  
-   8. If collaborators make changes on GitHub, use `git pull` to fetch and merge their updates.
+*** Check its status with `git status`.
+- After you create Test.txt and make a change to it, you should see something similar to this:
+#+begin_export shell
+git status
+#+end_export
+#+RESULTS:
+: On branch main
+: Your branch is up to date with 'origin/main'.
+: 
+: Untracked files:
+:   (use "git add <file>..." to include in what will be committed)
+: 	Test.txt
+: 
+: no changes added to commit (use "git add" and/or "git commit -a")
 
-** Summary
-Git allows you to manage file versions locally and collaborate remotely via GitHub. Using `git status`, `git add`, `git rm`, `git commit`, `git push`, and `git pull`, you can efficiently manage and share changes across different locations.
+*** Stage it for commit using `git add <file>`.
+#+begin_export shell
+git add Test.txt
+# To add all files in the current working directory, use 'git add .'
+#+end_export
+
+*** Commit the changes with a message using `git commit -m "<message>"`.
+#+begin_export shell
+git commit -m "Updated Test.txt"
+#+end_export
+
+*** If collaborators make changes on GitHub, use `git pull` to fetch and merge their updates.
+- You should pull often.
+- I usually pull once, before I begin working on something in a project, and then again before I push my changes
+  #+begin_export shell
+git pull
+  #+end_export
+
+*** Push your changes to GitHub using `git push`.
+#+begin_export shell
+git push
+#+end_export
+
+*** Admin Stuff
+You will need to update your name and email on your local git setup.
+Git will prompt you to do this when needed.
+
+You will also need to use a 'token' instead of a password to log in.
+When git prompts you to login, it will ask for a username and password - the password field is where you enter your 'token'.
+I would recommend running the command =git config credential.helper store= so that you do not have to do this repeatedly, though this is not the most "secure" option.
+Tokens can be created on your Github settings, under developer settings (left side, all the way down), and 'Personal Access Tokens'. If you are worried about security, setting a reasonable expiration date is a good idea.
+
 
