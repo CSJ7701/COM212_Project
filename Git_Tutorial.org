@@ -78,10 +78,11 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
       #+end_src
       - This will create the project directory under your current working directory.
 
-      #+begin_src shell
+      #+begin_src shell :exports both
       PWD
       #+end_src
-      #+RESULT: /home/test_user
+      #+RESULT:
+      : /home/test_user
 
       #+begin_src shell
       mkdir MyTestProject
@@ -92,7 +93,7 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
 
 *** Check its status with `git status`.
 - After you create Test.txt and make a change to it, you should see something similar to this:
-#+begin_src shell
+#+begin_src shell :exports both
 git status
 #+end_src
 #+RESULTS:
