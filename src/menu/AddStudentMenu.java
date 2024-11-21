@@ -2,6 +2,7 @@ package menu;
 
 import java.lang.reflect.Field;
 import java.util.Scanner;
+import student.Student;
 
 public class AddStudentMenu extends Menu {
     private Student student;

@@ -10,7 +10,7 @@ public class Student {
     private int SSN;
     private int ID;
 
-    public void getName() {
+    public String getName() {
 	return this.name;
     }
 
@@ -18,22 +18,22 @@ public class Student {
 	this.name = s;
     }
 
-    public void getEmail() {
+    public String getEmail() {
 	return this.email;
     }
 
     public void setEmail(String s) {
-	Pattern pattern = Pattern.compile("\w+@\w+\.\w+");
+	Pattern pattern = Pattern.compile("\b[abcdefghijklmnopqrstuvwxyx]+|\b[0-9]+@\b[abcdefghijklmnopqrstuvwxyz]+|\b[0-9]+..\b[edu]");
 	Matcher matcher = pattern.matcher(s);
 	boolean matchFound = matcher.find();
 	if (matchFound) {
 	    this.email = s;
 	} else {
-	    throw new ValueException("Please enter a valid email.");
+	    throw new IllegalArgumentException("Please enter a valid email.");
 	}
     }
 
-    public void getSSN() {
+    public int getSSN() {
 	return this.SSN % 10000;
     }
 
@@ -41,7 +41,7 @@ public class Student {
 	this.SSN = i;
     }
 
-    public void getID() {
+    public int getID() {
 	return this.ID;
     }
 

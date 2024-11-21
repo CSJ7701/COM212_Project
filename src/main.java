@@ -28,6 +28,8 @@ public class main {
     }
 
     // Submenu Definitions
+
+    // TODO
     private void addIdeaOpen() {
         menu.quit();  // Quit the menu
 	Menu addIdea = new Menu();
@@ -37,6 +39,7 @@ public class main {
 	addIdea.start();
     }
 
+    // Finished
     private void addStudentOpen() {
 	menu.quit();
 	AddStudentMenu addStudent = new AddStudentMenu();
@@ -46,6 +49,7 @@ public class main {
 	runMenu();
     }
 
+    // TODO
     private void searchStudentsOpen() {
 	menu.quit();
 	Menu searchStudents = new Menu();
@@ -55,6 +59,7 @@ public class main {
 	searchStudents.start();
     }
 
+    // TODO
     private void searchIdeasOpen() {
 	menu.quit();
 	Menu searchIdeas = new Menu();
@@ -64,6 +69,7 @@ public class main {
 	searchIdeas.start();
     }
 
+    // TODO
     private void bestIdeaOpen() {
 	menu.quit();
 	Menu bestIdea = new Menu();
