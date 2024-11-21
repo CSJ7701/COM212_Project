@@ -1,4 +1,5 @@
 import menu.Menu;
+import menu.AddStudentMenu;
 
 public class main {
     private Menu menu;
@@ -15,12 +16,12 @@ public class main {
         this.menu.setTopText(text); // Set the top section text
 
         // Add buttons and associate them with actions
-        this.menu.addButton("Add Idea", this::addIdeaOpen);
-        this.menu.addButton("Add Student", this::addStudentOpen);
-	this.menu.addButton("Search Students", this::searchStudentsOpen);
-	this.menu.addButton("Search Ideas", this::searchIdeasOpen);
-	this.menu.addButton("Get Best Idea", this::bestIdeaOpen);
-	this.menu.addButton("Exit", menu::quit);
+        this.menu.addItem("Add Idea", this::addIdeaOpen);
+        this.menu.addItem("Add Student", this::addStudentOpen);
+	this.menu.addItem("Search Students", this::searchStudentsOpen);
+	this.menu.addItem("Search Ideas", this::searchIdeasOpen);
+	this.menu.addItem("Get Best Idea", this::bestIdeaOpen);
+	this.menu.addItem("Exit", menu::quit);
 
         // Start the menu loop
         this.menu.start();
@@ -32,17 +33,17 @@ public class main {
 	Menu addIdea = new Menu();
 	String text = "Add an idea here.\nHow? IDK yet.\n We'll figure that out later.";
 	addIdea.setTopText(text);
-	addIdea.addButton("Exit", () -> submenuClose(addIdea));
+	addIdea.addItem("Exit", () -> submenuClose(addIdea));
 	addIdea.start();
     }
 
     private void addStudentOpen() {
 	menu.quit();
-	Menu addStudent = new Menu();
-	String text = "Add a student here.\nIDK how we're gonna do this either.";
+	AddStudentMenu addStudent = new AddStudentMenu();
+	String text = "THIS IS A TEST YAY.";
 	addStudent.setTopText(text);
-	addStudent.addButton("Exit", () -> submenuClose(addStudent));
 	addStudent.start();
+	runMenu();
     }
 
     private void searchStudentsOpen() {
@@ -50,7 +51,7 @@ public class main {
 	Menu searchStudents = new Menu();
 	String text = "Search for students...\nCan search by SSN or Student #...";
 	searchStudents.setTopText(text);
-	searchStudents.addButton("Exit", () -> submenuClose(searchStudents));
+	searchStudents.addItem("Exit", () -> submenuClose(searchStudents));
 	searchStudents.start();
     }
 
@@ -59,7 +60,7 @@ public class main {
 	Menu searchIdeas = new Menu();
 	String text = "Search for ideas by idea #...";
 	searchIdeas.setTopText(text);
-	searchIdeas.addButton("Exit", () -> submenuClose(searchIdeas));
+	searchIdeas.addItem("Exit", () -> submenuClose(searchIdeas));
 	searchIdeas.start();
     }
 
@@ -68,7 +69,7 @@ public class main {
 	Menu bestIdea = new Menu();
 	String text = "Get the best idea\nCan open idea, or delete.";
 	bestIdea.setTopText(text);
-	bestIdea.addButton("Exit", () -> submenuClose(bestIdea));
+	bestIdea.addItem("Exit", () -> submenuClose(bestIdea));
 	bestIdea.start();
     }
 
