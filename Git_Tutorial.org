@@ -78,17 +78,10 @@ GitHub is a cloud-based platform that hosts Git repositories, enabling remote co
       #+end_src
       - This will create the project directory under your current working directory.
 
-      #+begin_src shell :exports both
-      PWD
-      #+end_src
-      #+RESULT:
-      : /home/test_user
-
       #+begin_src shell
-      mkdir MyTestProject
-      cd MyTestProject
-      touch Test.txt
-      echo "This is text that will go into Test.txt" > ./Test.txt
+        cd COM212_Project
+        touch Test.txt
+        echo "This is text that will go into Test.txt" > ./Test.txt
       #+end_src
 
 *** Check its status with `git status`.
