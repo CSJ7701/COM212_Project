@@ -5,13 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import idea.Idea;
+import idea.IdeaQueue;
 
 public class Student {
     private String name;
     private String email;
     private int SSN;
     private int ID;
-    private Idea[] ideas;
+    private IdeaQueue ideas;  // Q w/ last 10 ideas
     private double avgRating; // for Student's last 10 ideas
 
     public String getName() {
@@ -67,8 +68,8 @@ public class Student {
     }
 
     public void addIdea(String ideaText, double rating) {
-        if (rating < 0 || rating > 5) {
-            throw new IllegalArgumentException("Rating must be between 0 and 5.");
+        if (rating < 0 || rating > 100) {
+            throw new IllegalArgumentException("Rating must be between 0 and 100.");
         }
 
         // Add the new idea and remove the oldest if the size exceeds 10
