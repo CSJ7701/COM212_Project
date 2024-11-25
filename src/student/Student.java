@@ -31,7 +31,7 @@ public class Student {
         Pattern pattern = Pattern.compile("\b[abcdefghijklmnopqrstuvwxyx]+|\b[0-9]+@\b[abcdefghijklmnopqrstuvwxyz]+|\b[0-9]+..\b[edu]");
         Matcher matcher = pattern.matcher(s);
         boolean matchFound = matcher.find();
-        if (matchFound) { // vet if valid email
+        if (matchFound) { // vet for valid email
 	        this.email = s;
 	    } else {
 	        throw new IllegalArgumentException("Please enter a valid email.");
@@ -54,31 +54,12 @@ public class Student {
 	    this.ID = i;
     }
 
-    public Idea[] getIdeas() {
-        if (ideas == null || ideas.length == 0) {
-            return new Idea[0]; //return empty array if no ideas
-        }
-
-        if (ideas.length <= 10) {
-            return ideas;
-        }
-
-        // Else just return last 10 ideas
-        return Arrays.copyOfRange(ideas, ideas.length - 10, ideas.length); 
+    public IdeaQueue getIdeas() {
+        return ideas;
     }
 
-    public void addIdea(String ideaText, double rating) {
-        if (rating < 0 || rating > 100) {
-            throw new IllegalArgumentException("Rating must be between 0 and 100.");
-        }
-
-        // Add the new idea and remove the oldest if the size exceeds 10
-        if (ideas.length == 10) {
-            //remove oldest idea from `ideas`
-        }
-
-        // in `ideas` arr, add a new Idea(ideaID, submittersSSN, ideaDescription, ideaRating)
-
+    public void addIdea(Idea x) {
+        ideas.enqueue(x);
         recalculateAvgRating();
     }
 
@@ -89,12 +70,18 @@ public class Student {
     // Helper method to recalc the avg (use when idea adding/amount is updated)
     public void recalculateAvgRating() {
         double total = 0.0;
-        for (Idea idea : ideas) {
-            total += idea.getRating();
-        }
+        int count = 0;
 
-        // Ternary operator to assign avg rating
-        this.avgRating = (ideas.length == 0) ? 0.0 : total / ideas.length;
+        // sum each idea rating in ideaQ
+        for (int i = 0; i < ideas.getSize(); i++) { 
+            Idea idea = ideas.get(i); 
+            if (idea != null) { // Check for non-null values
+                total += idea.getRating();
+                count++;
+            }
+        }
+        // Ternary operator to avoid division by 0 & calc avg rating
+        this.avgRating = (ideas.isEmpty()) ? 0.0 : total / ideas.getSize();
     }
 
 }

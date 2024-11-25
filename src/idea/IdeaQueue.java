@@ -29,4 +29,19 @@ public class IdeaQueue {
         ideaQ[tail] = x;
         n = n + 1;
     }
+
+    // returns # of ideas in IdeaQueue
+    public int getSize() {
+        return n;
+    }
+
+    // returns Idea at specified index in the IdeaQueue
+    public Idea get(int index) {
+        if (index < 0 || index >= n) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+        return ideaQ[index]; 
+    }
+
 }
+
