@@ -8,6 +8,10 @@ public class IdeaHeap{
     public boolean isEmptySet(){
       return n == 0;
     }
+
+    public int length() {
+	return n;
+    }
     
     //findMin function
     public int findMax(){
