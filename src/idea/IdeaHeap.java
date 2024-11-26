@@ -13,6 +13,51 @@ public class IdeaHeap{
     public int findMax(){
       return heap[0].getID();
     }
+
+        // Find function
+    public Idea find(int id) {
+        for (int i = 0; i < n; i++) {
+            if (heap[i].getID() == id) {
+                return heap[i];
+            }
+        }
+        return null; // Not found
+    }
+    
+    // Delete function
+    public void delete(int id) {
+        int index = -1;
+        
+        // Find the index of the idea to delete
+        for (int i = 0; i < n; i++) {
+            if (heap[i].getID() == id) {
+                index = i;
+                break;
+            }
+        }
+        
+        if (index == -1) {
+            throw new IllegalArgumentException("Idea with ID " + id + " not found.");
+        }
+        
+        // Replace with the last element and reduce size
+        n--;
+        swap(index, n);
+        
+        // Restore heap property
+        int parent = (index - 1) / 2;
+        if (index > 0 && heap[index].getID() > heap[parent].getID()) {
+            // Trickle up
+            while (index > 0 && heap[index].getID() > heap[parent].getID()) {
+                swap(index, parent);
+                index = parent;
+                parent = (index - 1) / 2;
+            }
+        } else {
+            // Trickle down
+            trickle(index, ((2*index)+1), ((2*index)+2));
+        }
+    }
     
     //insert function
     public void insert(Idea newIdea){

@@ -14,6 +14,10 @@ public class Idea {
         this.ideaRating = ideaRating;
     }
 
+    public Idea() {
+    }
+
+
     //Getters
     public int getID(){
         return ideaID;
