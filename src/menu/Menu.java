@@ -105,7 +105,7 @@ public class Menu {
     }
 
     protected void printBorder() {
-	System.out.print("=".repeat(this.width));
+	System.out.println("=".repeat(this.width));
     }
 
     protected void centerText(String text) {

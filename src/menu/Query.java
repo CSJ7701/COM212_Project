@@ -89,6 +89,9 @@ public class Query {
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 		System.out.println("Error setting field: " + e.getMessage());
 		return false;
+	    } catch (NumberFormatException e) {
+		//System.out.println("Please enter a numeric value: " + e.getMessage());
+		return false;
 	    }
 	} else {
 	    System.out.println("Invalid input. Please try again");
