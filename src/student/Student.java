@@ -12,6 +12,7 @@ public class Student {
     private String email;
     private int SSN;
     private int ID;
+    
     private IdeaQueue ideas;  // Q w/ last 10 ideas
     private double avgRating; // for Student's last 10 ideas
 
@@ -80,7 +81,7 @@ public class Student {
                 count++;
             }
         }
-        // Ternary operator to avoid division by 0 & calc avg rating
+        // Ternary operator to calc avg rating & avoid division by 0
         this.avgRating = (ideas.isEmpty()) ? 0.0 : total / ideas.getSize();
     }
 
