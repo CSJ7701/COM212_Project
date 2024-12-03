@@ -57,7 +57,6 @@ public class main {
 	this.ideaHeap.insert(newIdea);
 	this.ideaQueue.enqueue(newIdea);
 	this.ideaHash.insert(newIdea);
-	// TODO: Add idea to the IdeaHash table.
 	runMenu();
     }
 
