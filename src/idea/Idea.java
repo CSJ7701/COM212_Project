@@ -5,6 +5,7 @@ public class Idea {
     private int submittersSSN;
     private String ideaDescription;
     private int ideaRating;
+    private Idea next;
 
     //Constructor
     public Idea(int ideaID, int submittersSSN, String ideaDescription, int ideaRating){
@@ -12,6 +13,7 @@ public class Idea {
         this.submittersSSN = submittersSSN;
         this.ideaDescription = ideaDescription;
         this.ideaRating = ideaRating;
+        next = null;
     }
 
     public Idea() {
@@ -35,6 +37,10 @@ public class Idea {
         return ideaRating;
     }
 
+    public Idea getNext(){
+        return next;
+    }
+
     //Setters
     public void setID(int newID){
         ideaID = newID;
@@ -50,5 +56,9 @@ public class Idea {
 
     public void setRating(int newRating){
         ideaRating = newRating;
+    }
+
+    public void setNext(Idea idea){
+        next = idea;
     }
 }
