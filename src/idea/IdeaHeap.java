@@ -1,6 +1,6 @@
 package idea;
 
-public class IdeaHeap{
+public class IdeaHeap implements java.io.Serializable{
     private Idea[] heap = new Idea[120];
     private int n = 0;
     

@@ -1,6 +1,6 @@
 package idea;
 
-public class IdeaSCHash {
+public class IdeaSCHash implements java.io.Serializable{
     private Idea[] hash = new Idea[9];
     private int n = 0;
     
