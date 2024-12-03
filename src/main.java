@@ -6,6 +6,7 @@ import menu.searchIdeasMenu;
 import idea.Idea;
 import idea.IdeaHeap;
 import idea.IdeaQueue;
+import idea.IdeaSCHash;
 
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class main {
     private Menu menu;
     private IdeaHeap ideaHeap;
     private IdeaQueue ideaQueue;
+	private IdeaSCHash ideaHash;
     private boolean initialized;
 
 	public static void main(String[] args) {
@@ -53,6 +55,8 @@ public class main {
 	Idea newIdea = addIdea.getIdea();
 	newIdea.setID(this.ideaHeap.length()+1);
 	this.ideaHeap.insert(newIdea);
+	this.ideaQueue.enqueue(newIdea);
+	this.ideaHash.insert(newIdea);
 	// TODO: Add idea to the IdeaHash table.
 	runMenu();
     }
