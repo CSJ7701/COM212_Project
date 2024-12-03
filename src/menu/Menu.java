@@ -106,7 +106,7 @@ public class Menu {
     }
 
     protected void printBorder() {
-	System.out.println("=".repeat(this.width));
+	System.out.println("\033[34m=\033[0m".repeat(this.width));
     }
 
     protected void centerText(String text) {
