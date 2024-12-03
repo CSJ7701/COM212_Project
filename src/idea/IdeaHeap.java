@@ -18,6 +18,10 @@ public class IdeaHeap{
       return heap[0].getID();
     }
 
+    public Idea getMax() {
+	return heap[0];
+    }
+
         // Find function
     public Idea find(int id) {
         for (int i = 0; i < n; i++) {

@@ -90,6 +90,13 @@ public class AddIdeaMenu extends Menu {
 	while (true) {
 	    clearScreen();
 	    displayMenu();
+
+	    if (this.idea.getRating() > 100 || this.idea.getRating() < 0) {
+		centerText("Rating must be between 1-100. Press enter to try again.");
+		scanner.nextLine();
+		handleInput();
+	    }
+	    
 	    centerText("Is this information correct? (y/n): ");
 	    String confirmation = scanner.nextLine().trim().toLowerCase();
 
