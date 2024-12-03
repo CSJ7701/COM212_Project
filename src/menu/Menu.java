@@ -57,7 +57,8 @@ public class Menu {
 	printItems();
 
 	printBorder();
-	centerText("Enter your choice: ");
+	// centerText("Enter your choice: ");
+	centerText("\033[32m Enter your choice: \033[0m"); // output text in green
     }
 
     protected void handleInput() {
