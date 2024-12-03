@@ -9,6 +9,7 @@ import idea.IdeaQueue;
 import idea.IdeaSCHash;
 
 import java.util.Scanner;
+import java.io.*; 
 
 public class main {
     private Menu menu;

@@ -1,6 +1,6 @@
 package idea;
 
-public class IdeaQueue {
+public class IdeaQueue implements java.io.Serializable{
     private Idea[] ideaQ = new Idea[10];
     private int front = 0;
     private int n = 0;

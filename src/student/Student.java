@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import idea.Idea;
 import idea.IdeaQueue;
 
-public class Student {
+public class Student implements java.io.Serializable{
     private String name;
     private String email;
     private int SSN;

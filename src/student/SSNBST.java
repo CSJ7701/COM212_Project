@@ -1,6 +1,6 @@
 package student;
 
-public class SSNBST {
+public class SSNBST implements java.io.Serializable{
     private Student root = null;
     
     //isEmptyTree function
