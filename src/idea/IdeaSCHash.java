@@ -59,21 +59,4 @@ public class IdeaSCHash {
       return null;
     }
     
-    //print function
-    public void print(){
-      System.out.println("\nHash Table");
-      for (int i = 0; i < 9; ++i){
-        if (hash[i] == null){
-          System.out.print("");
-        } else {
-          System.out.print("\n" + hash[i].getID() + " ");
-          Idea temp = hash[i].getNext();
-          while (temp != null){
-            System.out.print(temp.getID() + " ");
-            temp = temp.getNext();
-          }
-        }
-      }
-      System.out.println("\n");
-    }
   }
