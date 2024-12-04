@@ -1,6 +1,6 @@
 package idea;
 
-public class Idea {
+public class Idea implements java.io.Serializable {
     private int ideaID;
     private int submittersSSN;
     private String ideaDescription;

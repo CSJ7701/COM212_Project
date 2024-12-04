@@ -15,10 +15,11 @@ public class AddStudentMenu extends Menu {
 	this.input = new String[10];
 	this.itemCount = 0;
 	this.student = new Student();
-	addItem("Name: ", this.student, "name");
-	addItem("Email: ", this.student, "email");
-	addItem("SSN: ", this.student, "SSN");
-	addItem("Student ID: ", this.student, "ID");
+	// prompts in yellow:
+	addItem("\033[33mName: \033[0m", this.student, "name");
+	addItem("\033[33mEmail: \033[0m", this.student, "email");
+	addItem("\033[33mSSN: \033[0m", this.student, "SSN");
+	addItem("\033[33mStudent ID: \033[0m", this.student, "ID");
     }
 
     // Most methods will remain the same.

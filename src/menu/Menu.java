@@ -57,7 +57,8 @@ public class Menu {
 	printItems();
 
 	printBorder();
-	centerText("Enter your choice: ");
+	// centerText("Enter your choice: ");
+	centerText("\033[32m Enter your choice: \033[0m"); // output text in green
     }
 
     protected void handleInput() {
@@ -105,7 +106,7 @@ public class Menu {
     }
 
     protected void printBorder() {
-	System.out.println("=".repeat(this.width));
+	System.out.println("\033[34m=\033[0m".repeat(this.width));
     }
 
     protected void centerText(String text) {

@@ -7,14 +7,32 @@ import java.util.regex.Pattern;
 import idea.Idea;
 import idea.IdeaQueue;
 
-public class Student {
+public class Student implements java.io.Serializable{
     private String name;
     private String email;
     private int SSN;
     private int ID;
+    private Student left;
+    private Student right;
     
     private IdeaQueue ideas;  // Q w/ last 10 ideas
     private double avgRating; // for Student's last 10 ideas
+
+    public Student getLeft(){
+        return left;
+    }
+
+    public void setLeft(Student left){
+        this.left = left;
+    }
+
+    public Student getRight(){
+        return right;
+    }
+
+    public void setRight(Student right){
+        this.right = right;
+    }
 
     public String getName() {
 	    return this.name;
