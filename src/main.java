@@ -60,7 +60,7 @@ public class main {
 
     private void addIdeaOpen() {
         menu.quit();  // Quit the menu
-	AddIdeaMenu addIdea = new AddIdeaMenu();
+	AddIdeaMenu addIdea = new AddIdeaMenu(this.SSNbst);
 	String text = "Create a new idea.\nPlease enter details:";
 	addIdea.setTopText(text);
 	addIdea.start();
