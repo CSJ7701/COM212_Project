@@ -54,9 +54,9 @@ public class IdeaHeap implements java.io.Serializable{
         
         // Restore heap property
         int parent = (index - 1) / 2;
-        if (index > 0 && heap[index].getID() > heap[parent].getID()) {
+        if (index > 0 && heap[index].getRating() > heap[parent].getRating()) {
             // Trickle up
-            while (index > 0 && heap[index].getID() > heap[parent].getID()) {
+            while (index > 0 && heap[index].getRating() > heap[parent].getRating()) {
                 swap(index, parent);
                 index = parent;
                 parent = (index - 1) / 2;
@@ -79,7 +79,7 @@ public class IdeaHeap implements java.io.Serializable{
       
         pIndex = (cIndex - 1) / 2;
       
-        while (heap[pIndex].getID() < heap[cIndex].getID()){
+        while (heap[pIndex].getRating() < heap[cIndex].getRating()){
           swap(pIndex, cIndex);
         
           cIndex = pIndex;
@@ -101,26 +101,26 @@ public class IdeaHeap implements java.io.Serializable{
       //test if parent two children, one child, or no children
       if ((child1 <= (n - 1)) && (child2 <= (n - 1))){
         //test if both children are greater than parent
-        if ((heap[parent].getID() < heap[child1].getID()) && (heap[parent].getID() < heap[child2].getID())){
+        if ((heap[parent].getRating() < heap[child1].getRating()) && (heap[parent].getRating() < heap[child2].getRating())){
           //swap bigger child
-          if (heap[child1].getID() > heap[child2].getID()){
+          if (heap[child1].getRating() > heap[child2].getRating()){
               swap(parent, child1);
               trickle(child1, ((2 * child1) + 1), ((2 * child1) + 2));
-          } else if (heap[child2].getID() > heap[child1].getID()){
+          } else if (heap[child2].getRating() > heap[child1].getRating()){
               swap(parent, child2);
               trickle(child2, ((2 * child2) + 1), ((2 * child2) + 2));
           }
         //test which child is bigger and which is smaller than parent
-        } else if ((heap[parent].getID() < heap[child1].getID()) && (heap[parent].getID() > heap[child2].getID())){
+        } else if ((heap[parent].getRating() < heap[child1].getRating()) && (heap[parent].getRating() > heap[child2].getRating())){
             swap(parent, child1);
             trickle(child1, ((2 * child1) + 1), ((2 * child1) + 2));
-        } else if ((heap[parent].getID() < heap[child2].getID()) && (heap[parent].getID() > heap[child1].getID())){
+        } else if ((heap[parent].getRating() < heap[child2].getRating()) && (heap[parent].getRating() > heap[child1].getRating())){
             swap(parent, child2);
             trickle(child2, ((2 * child2) + 1), ((2 * child2) + 2));
         }
       } else if ((child1 <= (n - 1)) && (child2 > (n - 1))){
         //swap child1 becuase it's an only child
-        if (heap[parent].getID() < heap[child1].getID()){
+        if (heap[parent].getRating() < heap[child1].getRating()){
           swap(parent, child1);
           trickle(child1, ((2 * child1) + 1), ((2 * child1) + 2));
         }

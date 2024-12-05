@@ -66,6 +66,7 @@ public class main {
 	addIdea.start();
 	Idea newIdea = addIdea.getIdea();
 	if (newIdea != null) {
+		this.idea_count = this.ideaHeap.length();
 	    newIdea.setID(this.idea_count+1);
 	    Student student = this.SSNbst.search(newIdea.getSubmitterSSN());
 	    student.addIdea(newIdea);
