@@ -62,6 +62,7 @@ public class Query {
 	    } else {
 		System.out.println("Invalid input. Please try again");
 	    }
+	    scanner.close();
 	}
     }
 
