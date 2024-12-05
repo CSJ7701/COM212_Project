@@ -16,7 +16,7 @@ public class AddIdeaMenu extends Menu {
 	this.SSNbst = bst;
 	this.itemCount = 0;
 	this.idea = new Idea();
-	addItem("\033[33mStudent's SSN: \033[0m", this.idea, "submittersSSN");
+	addItem("\033[33mLast four digits of Student's SSN: \033[0m", this.idea, "submittersSSN");
 	addItem("\033[33mDescription: \033[0m", this.idea, "ideaDescription");
 	addItem("\033[33mRating: \033[0m", this.idea, "ideaRating");
     }
