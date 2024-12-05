@@ -35,6 +35,10 @@ public class AddStudentMenu extends Menu {
 	}
     }
 
+    public Student getStudent() {
+	return this.student;
+    }
+
     @Override
     protected void printItems() {
 	for (int i=0; i<=this.itemCount; i++) {

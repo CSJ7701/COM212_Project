@@ -1,18 +1,19 @@
 package menu;
 
-import java.lang.reflect.Field;
-import java.util.Scanner;
 import idea.Idea;
+import student.SSNBST;
 
 public class AddIdeaMenu extends Menu {
     private Idea idea;
     protected Query[] items;
     private String[] input;
+    private SSNBST SSNbst;
 
-    public AddIdeaMenu() {
+    public AddIdeaMenu(SSNBST bst) {
 	super();
 	this.items = new Query[10];
 	this.input = new String[10];
+	this.SSNbst = bst;
 	this.itemCount = 0;
 	this.idea = new Idea();
 	addItem("\033[33mStudent's SSN: \033[0m", this.idea, "submittersSSN");
@@ -74,6 +75,7 @@ public class AddIdeaMenu extends Menu {
 		String userInput = scanner.nextLine().trim();
 
 		if (userInput.equalsIgnoreCase("EXIT")) {
+		    this.idea = null;
 		    quit();
 		    return;
 		}
@@ -91,10 +93,24 @@ public class AddIdeaMenu extends Menu {
 	    clearScreen();
 	    displayMenu();
 
+	    if (this.SSNbst.search(this.idea.getSubmitterSSN()) == null) {
+		centerText("Student with SSN " + this.idea.getSubmitterSSN() + " not found. Press enter to try again.");
+		scanner.nextLine();
+		for (int i = 0; i < this.input.length; i++) {
+		    input[i] = null;
+		}
+		handleInput();
+		return;
+	    }
+
 	    if (this.idea.getRating() > 100 || this.idea.getRating() < 0) {
 		centerText("Rating must be between 1-100. Press enter to try again.");
 		scanner.nextLine();
 		handleInput();
+		for (int i = 0; i < this.input.length; i++) {
+		    input[i] = null;
+		}
+		return;
 	    }
 	    
 	    centerText("Is this information correct? (y/n): ");

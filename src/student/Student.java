@@ -18,6 +18,10 @@ public class Student implements java.io.Serializable{
     private IdeaQueue ideas;  // Q w/ last 10 ideas
     private double avgRating; // for Student's last 10 ideas
 
+    public Student() {
+	this.ideas = new IdeaQueue();
+    }
+
     public Student getLeft(){
         return left;
     }
