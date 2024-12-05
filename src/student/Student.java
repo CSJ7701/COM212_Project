@@ -12,8 +12,10 @@ public class Student implements java.io.Serializable{
     private String email;
     private int SSN;
     private int ID;
-    private Student left;
-    private Student right;
+    private Student SSNLeft;
+    private Student SSNRight;
+    private Student IDLeft;
+    private Student IDRight;
     
     private IdeaQueue ideas;  // Q w/ last 10 ideas
     private double avgRating; // for Student's last 10 ideas
@@ -22,20 +24,36 @@ public class Student implements java.io.Serializable{
 	this.ideas = new IdeaQueue();
     }
 
-    public Student getLeft(){
-        return left;
+    public Student getSSNLeft(){
+        return SSNLeft;
     }
 
-    public void setLeft(Student left){
-        this.left = left;
+    public void setSSNLeft(Student left){
+        this.SSNLeft = left;
     }
 
-    public Student getRight(){
-        return right;
+    public Student getIDLeft(){
+        return IDLeft;
     }
 
-    public void setRight(Student right){
-        this.right = right;
+    public void setIDLeft(Student left){
+        this.IDLeft = left;
+    }
+
+    public Student getSSNRight(){
+        return SSNRight;
+    }
+
+    public void setSSNRight(Student right){
+        this.SSNRight = right;
+    }
+
+    public Student getIDRight(){
+        return IDRight;
+    }
+
+    public void setIDRight(Student right){
+        this.IDRight = right;
     }
 
     public String getName() {
