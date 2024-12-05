@@ -12,7 +12,7 @@ public class IdeaHeap implements java.io.Serializable{
     public int length() {
 	return n;
     }
-    
+  
     //findMin function
     public int findMax(){
       return heap[0].getID();
