@@ -20,9 +20,9 @@ public class IDBST implements java.io.Serializable{
       } else if (key == currNode.getID()){
         return currNode;
       } else if (key < currNode.getID()){
-        return searchR(currNode.getLeft(), key);
+        return searchR(currNode.getIDLeft(), key);
       } else {
-        return searchR(currNode.getRight(), key);
+        return searchR(currNode.getIDRight(), key);
       }
     }
     
@@ -38,16 +38,16 @@ public class IDBST implements java.io.Serializable{
     //insert recursion
     private void insertR(Student currNode, Student newNode){
       if (currNode.getID() < newNode.getID()){
-        if (currNode.getRight() == null){
-          currNode.setRight(newNode);
+        if (currNode.getIDRight() == null){
+          currNode.setIDRight(newNode);
         } else {
-          insertR(currNode.getRight(), newNode);
+          insertR(currNode.getIDRight(), newNode);
         }
       } else {
-        if (currNode.getLeft() == null){
-          currNode.setLeft(newNode);
+        if (currNode.getIDLeft() == null){
+          currNode.setIDLeft(newNode);
         } else {
-          insertR(currNode.getLeft(), newNode);
+          insertR(currNode.getIDLeft(), newNode);
         }
       }
     }
@@ -65,19 +65,19 @@ public class IDBST implements java.io.Serializable{
     
     //delete find node recursion
     private Student deleteR(Student pNode, Student delNode){
-      if (delNode.getID() < pNode.getID() && pNode.getLeft() != null){
-        if (pNode.getLeft().getID() == delNode.getID()){
-          pNode.setLeft(deleteRoot(pNode.getLeft()));
-          pNode.getLeft();
+      if (delNode.getID() < pNode.getID() && pNode.getIDLeft() != null){
+        if (pNode.getIDLeft().getID() == delNode.getID()){
+          pNode.setIDLeft(deleteRoot(pNode.getIDLeft()));
+          pNode.getIDLeft();
         } else {
-          deleteR(pNode.getLeft(), delNode);
+          deleteR(pNode.getIDLeft(), delNode);
         }
-      } else if (delNode.getID() > pNode.getID() && pNode.getRight() != null){
-        if (pNode.getRight().getID() == delNode.getID()){
-          pNode.setRight(deleteRoot(pNode.getRight()));
-          pNode.getRight();
+      } else if (delNode.getID() > pNode.getID() && pNode.getIDRight() != null){
+        if (pNode.getIDRight().getID() == delNode.getID()){
+          pNode.setIDRight(deleteRoot(pNode.getIDRight()));
+          pNode.getIDRight();
         } else {
-          deleteR(pNode.getRight(), delNode);
+          deleteR(pNode.getIDRight(), delNode);
         }
       }
       return pNode;
@@ -85,32 +85,32 @@ public class IDBST implements java.io.Serializable{
     
     //delete remove node recursion
     private Student deleteRoot(Student root){
-      if (root.getRight() == null && root.getLeft() == null){
+      if (root.getIDRight() == null && root.getIDLeft() == null){
         return null;
-      } else if (root.getRight() == null && root.getLeft() != null){
-        return root.getLeft();
-      } else if (root.getRight() != null && root.getLeft() == null){
-        return root.getRight();
+      } else if (root.getIDRight() == null && root.getIDLeft() != null){
+        return root.getIDLeft();
+      } else if (root.getIDRight() != null && root.getIDLeft() == null){
+        return root.getIDRight();
       } else {
-        Student successor = root.getRight();
+        Student successor = root.getIDRight();
         Student successorParent = root;
          
-        while (successor.getLeft() != null){
+        while (successor.getIDLeft() != null){
           successorParent = successor;
-          successor = successor.getLeft();
+          successor = successor.getIDLeft();
         }
        
         if (successorParent == root){
-          successor.setLeft(root.getLeft());
-          successor.setRight(null);
+          successor.setIDLeft(root.getIDLeft());
+          successor.setIDRight(null);
         } else {
-          successorParent.setLeft(deleteRoot(successor));
-          successor.setRight(root.getRight());
-          successor.setLeft(root.getLeft());
+          successorParent.setIDLeft(deleteRoot(successor));
+          successor.setIDRight(root.getIDRight());
+          successor.setIDLeft(root.getIDLeft());
         }
         
-        root.setLeft(null);
-        root.setRight(null);
+        root.setIDLeft(null);
+        root.setIDRight(null);
        
         return successor;
       }
@@ -125,9 +125,9 @@ public class IDBST implements java.io.Serializable{
     //traverse recursion
     private void traverseR(Student currNode){
       if (currNode != null){
-        traverseR(currNode.getLeft());
+        traverseR(currNode.getIDLeft());
         System.out.print(currNode.getID() + " ");
-        traverseR(currNode.getRight());
+        traverseR(currNode.getIDRight());
       }
     }
   
@@ -141,18 +141,18 @@ public class IDBST implements java.io.Serializable{
     private void printTree2(Student tree) {
       if (tree != null) {
         System.out.print(tree.getID() + " ");
-        if (tree.getLeft() != null){
-          System.out.print("Left: " + tree.getLeft().getID() + " ");
+        if (tree.getIDLeft() != null){
+          System.out.print("Left: " + tree.getIDLeft().getID() + " ");
         } else {
           System.out.print("Left: null ");
         }
-        if (tree.getRight() != null){
-          System.out.println("Right: " + tree.getRight().getID() + " ");
+        if (tree.getIDRight() != null){
+          System.out.println("Right: " + tree.getIDRight().getID() + " ");
         } else {
           System.out.println("Right: null ");
         }
-        printTree2(tree.getLeft());
-        printTree2(tree.getRight());
+        printTree2(tree.getIDLeft());
+        printTree2(tree.getIDRight());
       }
     }
 }

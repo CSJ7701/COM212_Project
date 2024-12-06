@@ -20,9 +20,9 @@ public class SSNBST implements java.io.Serializable{
       } else if (key == currNode.getSSN()){
         return currNode;
       } else if (key < currNode.getSSN()){
-        return searchR(currNode.getLeft(), key);
+        return searchR(currNode.getSSNLeft(), key);
       } else {
-        return searchR(currNode.getRight(), key);
+        return searchR(currNode.getSSNRight(), key);
       }
     }
     
@@ -38,16 +38,16 @@ public class SSNBST implements java.io.Serializable{
     //insert recursion
     private void insertR(Student currNode, Student newNode){
       if (currNode.getSSN() < newNode.getSSN()){
-        if (currNode.getRight() == null){
-          currNode.setRight(newNode);
+        if (currNode.getSSNRight() == null){
+          currNode.setSSNRight(newNode);
         } else {
-          insertR(currNode.getRight(), newNode);
+          insertR(currNode.getSSNRight(), newNode);
         }
       } else {
-        if (currNode.getLeft() == null){
-          currNode.setLeft(newNode);
+        if (currNode.getSSNLeft() == null){
+          currNode.setSSNLeft(newNode);
         } else {
-          insertR(currNode.getLeft(), newNode);
+          insertR(currNode.getSSNLeft(), newNode);
         }
       }
     }
@@ -65,19 +65,19 @@ public class SSNBST implements java.io.Serializable{
     
     //delete find node recursion
     private Student deleteR(Student pNode, Student delNode){
-      if (delNode.getSSN() < pNode.getSSN() && pNode.getLeft() != null){
-        if (pNode.getLeft().getSSN() == delNode.getSSN()){
-          pNode.setLeft(deleteRoot(pNode.getLeft()));
-          pNode.getLeft();
+      if (delNode.getSSN() < pNode.getSSN() && pNode.getSSNLeft() != null){
+        if (pNode.getSSNLeft().getSSN() == delNode.getSSN()){
+          pNode.setSSNLeft(deleteRoot(pNode.getSSNLeft()));
+          pNode.getSSNLeft();
         } else {
-          deleteR(pNode.getLeft(), delNode);
+          deleteR(pNode.getSSNLeft(), delNode);
         }
-      } else if (delNode.getSSN() > pNode.getSSN() && pNode.getRight() != null){
-        if (pNode.getRight().getSSN() == delNode.getSSN()){
-          pNode.setRight(deleteRoot(pNode.getRight()));
-          pNode.getRight();
+      } else if (delNode.getSSN() > pNode.getSSN() && pNode.getSSNRight() != null){
+        if (pNode.getSSNRight().getSSN() == delNode.getSSN()){
+          pNode.setSSNRight(deleteRoot(pNode.getSSNRight()));
+          pNode.getSSNRight();
         } else {
-          deleteR(pNode.getRight(), delNode);
+          deleteR(pNode.getSSNRight(), delNode);
         }
       }
       return pNode;
@@ -85,32 +85,32 @@ public class SSNBST implements java.io.Serializable{
     
     //delete remove node recursion
     private Student deleteRoot(Student root){
-      if (root.getRight() == null && root.getLeft() == null){
+      if (root.getSSNRight() == null && root.getSSNLeft() == null){
         return null;
-      } else if (root.getRight() == null && root.getLeft() != null){
-        return root.getLeft();
-      } else if (root.getRight() != null && root.getLeft() == null){
-        return root.getRight();
+      } else if (root.getSSNRight() == null && root.getSSNLeft() != null){
+        return root.getSSNLeft();
+      } else if (root.getSSNRight() != null && root.getSSNLeft() == null){
+        return root.getSSNRight();
       } else {
-        Student successor = root.getRight();
+        Student successor = root.getSSNRight();
         Student successorParent = root;
          
-        while (successor.getLeft() != null){
+        while (successor.getSSNLeft() != null){
           successorParent = successor;
-          successor = successor.getLeft();
+          successor = successor.getSSNLeft();
         }
        
         if (successorParent == root){
-          successor.setLeft(root.getLeft());
-          successor.setRight(null);
+          successor.setSSNLeft(root.getSSNLeft());
+          successor.setSSNRight(null);
         } else {
-          successorParent.setLeft(deleteRoot(successor));
-          successor.setRight(root.getRight());
-          successor.setLeft(root.getLeft());
+          successorParent.setSSNLeft(deleteRoot(successor));
+          successor.setSSNRight(root.getSSNRight());
+          successor.setSSNLeft(root.getSSNLeft());
         }
         
-        root.setLeft(null);
-        root.setRight(null);
+        root.setSSNLeft(null);
+        root.setSSNRight(null);
        
         return successor;
       }
@@ -125,9 +125,9 @@ public class SSNBST implements java.io.Serializable{
     //traverse recursion
     private void traverseR(Student currNode){
       if (currNode != null){
-        traverseR(currNode.getLeft());
+        traverseR(currNode.getSSNLeft());
         System.out.print(currNode.getSSN() + " ");
-        traverseR(currNode.getRight());
+        traverseR(currNode.getSSNRight());
       }
     }
   
@@ -141,18 +141,18 @@ public class SSNBST implements java.io.Serializable{
     private void printTree2(Student tree) {
       if (tree != null) {
         System.out.print(tree.getSSN() + " ");
-        if (tree.getLeft() != null){
-          System.out.print("Left: " + tree.getLeft().getSSN() + " ");
+        if (tree.getSSNLeft() != null){
+          System.out.print("Left: " + tree.getSSNLeft().getSSN() + " ");
         } else {
           System.out.print("Left: null ");
         }
-        if (tree.getRight() != null){
-          System.out.println("Right: " + tree.getRight().getSSN() + " ");
+        if (tree.getSSNRight() != null){
+          System.out.println("Right: " + tree.getSSNRight().getSSN() + " ");
         } else {
           System.out.println("Right: null ");
         }
-        printTree2(tree.getLeft());
-        printTree2(tree.getRight());
+        printTree2(tree.getSSNLeft());
+        printTree2(tree.getSSNRight());
       }
     }
 }
