@@ -94,7 +94,7 @@ public class DisplayStudent extends Menu {
 	clearScreen();
 	System.out.println("\n");
 	printBorder();
-	centerText("Are you sure you want to delete this idea? (yes/no): ");
+	centerText("Are you sure you want to delete this Student? (yes/no): ");
 	String confirm = scanner.nextLine();
 	if (confirm.equalsIgnoreCase("yes")) {
 	    SSNbst.delete(this.student);

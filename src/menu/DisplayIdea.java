@@ -18,7 +18,7 @@ public class DisplayIdea extends Menu {
         
         // Add menu options
         addItem("Edit Idea", this::editIdea);
-        addItem("Delete Idea", this::deleteIdea);
+        addItem("Sell Idea", this::deleteIdea);
         addItem("Quit", this::quit);
     }
 
@@ -109,7 +109,7 @@ public class DisplayIdea extends Menu {
             quit(); // Exit the menu
         } else {
 	    System.out.println("\n");
-		printBorder();
+	    printBorder();
             centerText("Deletion canceled. Press enter to return to menu.");
             scanner.nextLine();
         }
