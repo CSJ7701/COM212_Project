@@ -39,6 +39,7 @@ public class DisplayStudent extends Menu {
 	centerText("Email: " + student.getEmail() + "\n");
 	centerText("SSN: " + student.getSSN() + "\n");
 	centerText("Student ID: " + student.getID() + "\n");
+	centerText("Average Idea Score: " + avgIdeaScore() + "\n");
 	System.out.println("\n");
 	centerText(" --- ");
 	System.out.println("\n");
@@ -53,6 +54,16 @@ public class DisplayStudent extends Menu {
 	studentIdeasMenu ideaBrowse = new studentIdeasMenu(ideas, this.ideaHeap);
 	ideaBrowse.start();
 	quit();
+    }
+
+    private double avgIdeaScore() {
+	IdeaQueue ideas = this.student.getIdeas();
+	int n = ideas.getSize();
+	double sum = 0;
+	for (int i = 0; i < n; i++) {
+	    sum += (double) ideas.get(i).getRating();
+	}
+	return sum / n;
     }
 	
 
