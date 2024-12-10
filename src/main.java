@@ -41,6 +41,56 @@ public class main {
 	//         Say we have a "ideaHeap.???" file where we have serialized our ideaHeap structure.
 	//         This would check whether "ideaHeap.???" exists, and if it does, load its data to IdeaHeap temp = *loaded_data*.
 	//         We could then set this.ideaHeap = temp;.
+	
+    try {
+		//Path to the directory where serialized files are stored
+                // vvv (Not sure if this path will be correct...)
+		String serDataDirectory = "COM212_Project/serialized-files/";
+        
+        // Check and load ideaHeap
+        File ideaHeapFile = new File(serDataDirectory + "ideaHeap.ser");
+        if (ideaHeapFile.exists()) {
+            try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ideaHeapFile))) {
+                IdeaHeap tempHeap = (IdeaHeap) objIS.readObject();
+                this.ideaHeap = tempHeap;
+            }
+        }
+
+        // Check and load ideaHash
+        File ideaHashFile = new File(serDataDirectory + "ideaHash.ser");
+        if (ideaHashFile.exists()) {
+            try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ideaHashFile))) {
+                IdeaSCHash tempHash = (IdeaSCHash) objIS.readObject();
+                this.ideaHash = tempHash;
+            }
+        }
+
+        // Check and load IDbst
+        File idBstFile = new File(serDataDirectory + "IDbst.ser");
+        if (idBstFile.exists()) {
+            try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(idBstFile))) {
+                IDBST tempIDBst = (IDBST) objIS.readObject();
+                this.IDbst = tempIDBst;
+            }
+        }
+
+        // Check and load SSNbst
+        File ssnBstFile = new File(serDataDirectory + "SSNbst.ser");
+        if (ssnBstFile.exists()) {
+            try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ssnBstFile))) {
+                SSNBST tempSSNBst = (SSNBST) objIS.readObject();
+                this.SSNbst = tempSSNBst;
+            }
+        }
+
+        // After loading, set initialized to true if all objects are successfully loaded
+        this.initialized = (this.ideaHeap != null && this.ideaHash != null && this.IDbst != null && this.SSNbst != null);
+    } catch (IOException | ClassNotFoundException e) {
+        // Handle exceptions (e.g., file not found, deserialization errors)
+        System.err.println("Error loading serialized data: " + e.getMessage());
+        e.printStackTrace();
+    }
+
 
 	// This will be dependent on where/how we end up serializing our structures.
 	if (this.initialized != true) {
