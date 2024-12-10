@@ -16,8 +16,9 @@ public class AddIdeaMenu extends Menu {
 	this.SSNbst = bst;
 	this.itemCount = 0;
 	this.idea = new Idea();
+	String descriptionRegex = ".{20,}"; // Checks whether the description is 20 chars or longer
 	addItem("\033[33mLast four digits of Student's SSN: \033[0m", this.idea, "submittersSSN");
-	addItem("\033[33mDescription: \033[0m", this.idea, "ideaDescription");
+	addItem("\033[33mDescription: \033[0m", this.idea, "ideaDescription", descriptionRegex, "Description must be at least 20 characters.");
 	addItem("\033[33mRating: \033[0m", this.idea, "ideaRating");
     }
 
@@ -33,6 +34,17 @@ public class AddIdeaMenu extends Menu {
 	    centerText("Cannot add more queries. Max limit reached.\n");
 	}
     }
+
+    public void addItem(String prompt, Object target, String attribute, String validationRegex, String errorMessage) {
+	if (this.itemCount < 10) {
+	    this.items[this.itemCount] = new Query(prompt, target, attribute, validationRegex, errorMessage);
+	    this.itemCount++;
+	} else {
+	    centerText("Cannot add more queries. Max limit reached.\n");
+	}
+    }
+
+    
 
     @Override
     protected void printItems() {
@@ -85,6 +97,7 @@ public class AddIdeaMenu extends Menu {
 		    break;
 		} else {
 		    centerText("Invalid input. Please try again.\n");
+		    centerText(query.getError() + "\n");
 		}
 	    }
 	}

@@ -70,6 +70,9 @@ public class DisplayIdea extends Menu {
             }
         }
 
+	this.ideaHeap.delete(this.idea.getID()); // Remove the current idea from the heap
+	this.ideaHeap.insert(this.idea); // Reinsert the idea so that it gets sorted to the correct position
+
         // Return to menu
         centerText("Idea updated. Press enter to return to menu.");
         scanner.nextLine();

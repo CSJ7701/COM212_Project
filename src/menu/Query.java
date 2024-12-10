@@ -5,15 +5,17 @@ import java.lang.reflect.Field;
 
 public class Query {
     private final String prompt;
-    private final String validationRegex; // Optional - idea. May not work?
+    private final String validationRegex; // 
     private final Object target;
     private final String attribute;
+    private final String errorMessage;
 
-    public Query(String prompt, Object target, String attribute, String validationRegex) {
+    public Query(String prompt, Object target, String attribute, String validationRegex, String errorMessage) {
 	this.prompt = prompt;
 	this.target = target;
 	this.attribute = attribute;
 	this.validationRegex = validationRegex;
+	this.errorMessage = errorMessage;
     }
 
     public Query(String prompt, Object target, String attribute) {
@@ -21,10 +23,15 @@ public class Query {
 	this.target = target;
 	this.attribute = attribute;
 	this.validationRegex = null;
+	this.errorMessage = "";
     }
 
     public String getPrompt() {
 	return this.prompt;
+    }
+
+    public String getError() {
+	return this.errorMessage;
     }
 
     public void execute() {

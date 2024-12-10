@@ -20,11 +20,12 @@ public class AddStudentMenu extends Menu {
 	this.SSNbst = ssnbst;
 	this.IDbst = idbst;
 	String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+	String numberRegex = "^\\d{4}$"; // Regex to match a 4 digit number - for SSN and ID
 	// prompts in yellow:
 	addItem("\033[33mName: \033[0m", this.student, "name");
-	addItem("\033[33mEmail: \033[0m", this.student, "email", emailRegex);
-	addItem("\033[33mSSN: \033[0m", this.student, "SSN");
-	addItem("\033[33mStudent ID: \033[0m", this.student, "ID");
+	addItem("\033[33mEmail: \033[0m", this.student, "email", emailRegex, "Not a valid email.");
+	addItem("\033[33mSSN: \033[0m", this.student, "SSN", numberRegex, "Not a valid SSN. Must be 4 digits.");
+	addItem("\033[33mStudent ID: \033[0m", this.student, "ID", numberRegex, "Not a valid Student ID. Must be 4 digits.");
     }
 
     // Most methods will remain the same.
@@ -40,9 +41,9 @@ public class AddStudentMenu extends Menu {
 	}
     }
 
-    public void addItem(String prompt, Object target, String attribute, String validationRegex) {
+    public void addItem(String prompt, Object target, String attribute, String validationRegex, String errorMessage) {
 	if (this.itemCount < 10) {
-	    this.items[this.itemCount] = new Query(prompt, target, attribute, validationRegex);
+	    this.items[this.itemCount] = new Query(prompt, target, attribute, validationRegex, errorMessage);
 	    this.itemCount++;
 	} else {
 	    centerText("Cannot add more queries. Max limit reached.\n");
@@ -106,6 +107,7 @@ public class AddStudentMenu extends Menu {
 			break;
 		    } else {
 			centerText("Invalid input. Please try again.\n");
+			centerText(query.getError() + "\n");
 		    }
 		}
 	    }
@@ -113,36 +115,6 @@ public class AddStudentMenu extends Menu {
 	    //	    while (true) {
 	    clearScreen();
 	    displayMenu();
-
-	    // Check for errors
-	    boolean error = false;
-	    String errorString = new String();
-	    if (this.IDbst.search(this.student.getID()) != null) {
-		error = true;
-		errorString = "ID. Must be unique";
-	    } else if (this.SSNbst.search(this.student.getSSN()) != null) {
-		error = true;
-		errorString = "SSN. Must be unique";
-	    } else if (this.student.getID() > 9999 || this.student.getID() < 1000) {
-		error = true;
-		errorString = "ID. Must be 4 digits";
-	    } else if (this.student.getSSN() > 9999 || this.student.getSSN() < 1000) {
-		error = true;
-		errorString = "SSN. Must be 4 digits.";
-	    }
-		
-
-
-	    // Show error message
-	    if (error) {
-		clearScreen();
-		//this.input = new String[10];
-		//this.student = new Student();
-		centerText("\033[33mInvalid " + errorString + ".\n\033[0m");
-		centerText("Please try again.\n");
-		scanner.nextLine();
-		continue;
-	    }
 
 	    centerText("Is this information correct? (y/n): ");
 	    String confirmation = scanner.nextLine().trim().toLowerCase();
