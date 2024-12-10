@@ -3,6 +3,7 @@ import menu.AddIdeaMenu;
 import menu.AddStudentMenu;
 import menu.searchIdeasMenu;
 import menu.searchStudentsMenu;
+import menu.listStudentsMenu;
 import menu.DisplayIdea;
 
 import idea.Idea;
@@ -33,6 +34,15 @@ public class main {
 
     // Method to initialize and start the menu
     private void runMenu() {
+	// TODO load serialized data.
+	// 'IF file with *name* exists, load file as *variable*, and set *this.variable* = *variable*
+	// Example situation:
+	//         We could end up saving serialized data to the *project_name*/data directory.
+	//         Say we have a "ideaHeap.???" file where we have serialized our ideaHeap structure.
+	//         This would check whether "ideaHeap.???" exists, and if it does, load its data to IdeaHeap temp = *loaded_data*.
+	//         We could then set this.ideaHeap = temp;.
+
+	// This will be dependent on where/how we end up serializing our structures.
 	if (this.initialized != true) {
 	    this.ideaHeap = new IdeaHeap();
 	    this.ideaHash = new IdeaSCHash();
@@ -42,7 +52,7 @@ public class main {
 	    this.initialized = true;
 	}
 	this.menu = new Menu(); // Initialize the menu object
-	String text = "Welcome.\n";
+	String text = "\n\nWelcome to the Student Idea Management System.\nPlease select an option...\n\n";
 	this.menu.setTopText(text); // Set the top section text
 
 	// Add buttons and associate them with actions
@@ -50,6 +60,7 @@ public class main {
 	this.menu.addItem("Add Student", this::addStudentOpen);
 	this.menu.addItem("Search Students", this::searchStudentsOpen);
 	this.menu.addItem("Search Ideas", this::searchIdeasOpen);
+	this.menu.addItem("List All Students", this::listStudentsOpen);
 	this.menu.addItem("Get Best Idea", this::bestIdeaOpen);
 	this.menu.addItem("Exit", menu::quit);
         // Start the menu loop
@@ -61,7 +72,7 @@ public class main {
     private void addIdeaOpen() {
         menu.quit();  // Quit the menu
 	AddIdeaMenu addIdea = new AddIdeaMenu(this.SSNbst);
-	String text = "Create a new idea.\nPlease enter details:";
+	String text = "Create a new idea.\nPlease enter details:\n\nSSN should reference the student who created the idea.\nDescription must be at least 20 characters.\nRating must be a number from 0-100, where 0 is poor.\n\n\nType 'EXIT' at any time to terminate this process.\n";
 	addIdea.setTopText(text);
 	addIdea.start();
 	Idea newIdea = addIdea.getIdea();
@@ -78,19 +89,18 @@ public class main {
 
     private void addStudentOpen() {
 	menu.quit();
-	AddStudentMenu addStudent = new AddStudentMenu();
-	String text = "Create a new student.\nPlease enter details:";
+	AddStudentMenu addStudent = new AddStudentMenu(this.SSNbst, this.IDbst);
+	String text = "Create a new student.\nPlease enter details:\n\nName should be the student's last name.\nEmail should be a valid email.\nSSN should be a 4 digit number, unique from other students.\nID should be a 4 digit number, unique from other students.\n\nType 'EXIT' at any time to terminate this process.\n";
 	addStudent.setTopText(text);
 	addStudent.start();
 	Student newStudent = addStudent.getStudent();
-	if (newStudent != null) {
+	if (newStudent != null && newStudent.getSSN() != 0) {
 	    this.IDbst.insert(newStudent);
 	    this.SSNbst.insert(newStudent);
 	}
 	runMenu();
     }
 
-    // TODO
     private void searchStudentsOpen() {
 	menu.quit();
 	Menu searchStudents = new searchStudentsMenu(this.IDbst, this.SSNbst, this.ideaHeap);
@@ -99,7 +109,6 @@ public class main {
 	runMenu();
     }
 
-    // TODO
     private void searchIdeasOpen() {
 	menu.quit();
 	Menu searchIdeas = new searchIdeasMenu(this.ideaHeap);
@@ -107,11 +116,19 @@ public class main {
 	runMenu();
     }
 
-    // TODO
+    //TODO
+    private void listStudentsOpen() {
+	menu.quit();
+	Menu listStudents = new listStudentsMenu(this.IDbst, this.SSNbst, this.ideaHeap);
+	listStudents.start();
+	runMenu();
+    }
+
     private void bestIdeaOpen() {
 	Idea best_idea = this.ideaHeap.getMax();
 	if (best_idea == null) {
 	    menu.setTopText("\033[31m\nThere are no valid ideas in storage.\033[0m\n");
+	    menu.start();
 	} else {
 	    menu.quit();
 	    DisplayIdea display = new DisplayIdea(best_idea, this.ideaHeap);

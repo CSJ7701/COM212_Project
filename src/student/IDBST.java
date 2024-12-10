@@ -12,6 +12,10 @@ public class IDBST implements java.io.Serializable{
     public Student search(int key){
       return searchR(root, key);
     }
+
+    public Student getRoot() {
+	return this.root;
+    }
    
     //search recursion
     private Student searchR(Student currNode, int key){
