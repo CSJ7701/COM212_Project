@@ -32,7 +32,7 @@ To set up this project locally, follow these steps:
    ```
 4. Run the project:
    ```sh
-   java -cp bin MainClassName
+   java -cp bin main
    ```
 
 ## Usage
