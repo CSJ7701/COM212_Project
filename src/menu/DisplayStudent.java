@@ -86,30 +86,8 @@ public class DisplayStudent extends Menu {
 	    student.setEmail(newEmail);
 	}
 
-	// Update SSN
-	centerText("Enter a new SSN (leave blank to skip): ");
-	String newSSN = scanner.nextLine();
-	if (!newSSN.isBlank()) {
-	    try {
-		int newSSN_int = Integer.parseInt(newSSN);
-		student.setSSN(newSSN_int);
-	    } catch (NumberFormatException e) {
-		centerText("Invalid SSN. Skipping update.");
-		System.out.println();
-	    }
-	}
-
-	centerText("Enter a new ID (leave blank to skip): ");
-	String newID = scanner.nextLine();
-	if (!newID.isBlank()) {
-	    try {
-		int newID_int = Integer.parseInt(newID);
-		student.setID(newID_int);
-	    } catch (NumberFormatException e) {
-		centerText("Invalid ID. Skipping Update.");
-		System.out.println();
-	    }
-	}
+	// Can only edit name and email - SSN and ID are permanent.
+	
     }
 
     private void deleteStudent() {
