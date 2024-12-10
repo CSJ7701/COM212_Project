@@ -19,9 +19,10 @@ public class AddStudentMenu extends Menu {
 	this.student = new Student();
 	this.SSNbst = ssnbst;
 	this.IDbst = idbst;
+	String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	// prompts in yellow:
 	addItem("\033[33mName: \033[0m", this.student, "name");
-	addItem("\033[33mEmail: \033[0m", this.student, "email");
+	addItem("\033[33mEmail: \033[0m", this.student, "email", emailRegex);
 	addItem("\033[33mSSN: \033[0m", this.student, "SSN");
 	addItem("\033[33mStudent ID: \033[0m", this.student, "ID");
     }
@@ -39,13 +40,22 @@ public class AddStudentMenu extends Menu {
 	}
     }
 
+    public void addItem(String prompt, Object target, String attribute, String validationRegex) {
+	if (this.itemCount < 10) {
+	    this.items[this.itemCount] = new Query(prompt, target, attribute, validationRegex);
+	    this.itemCount++;
+	} else {
+	    centerText("Cannot add more queries. Max limit reached.\n");
+	}
+    }
+
     public Student getStudent() {
 	return this.student;
     }
 
     @Override
     protected void printItems() {
-	for (int i=0; i<=this.itemCount; i++) {
+	for (int i=0; i<this.itemCount; i++) {
 	    if (items[i] != null) {
 		String info = "";
 		if (input[i] != null) {
@@ -86,6 +96,7 @@ public class AddStudentMenu extends Menu {
 		    String userInput = scanner.nextLine().trim();
 
 		    if (userInput.equalsIgnoreCase("EXIT")) {
+			this.student = new Student();
 			quit();
 			return;
 		    }
@@ -125,8 +136,8 @@ public class AddStudentMenu extends Menu {
 	    // Show error message
 	    if (error) {
 		clearScreen();
-		this.input = new String[10];
-		this.student = new Student();
+		//this.input = new String[10];
+		//this.student = new Student();
 		centerText("\033[33mInvalid " + errorString + ".\n\033[0m");
 		centerText("Please try again.\n");
 		scanner.nextLine();
@@ -141,8 +152,9 @@ public class AddStudentMenu extends Menu {
 		quit();
 		return;
 	    } else if (confirmation.equals("n")) {
-		this.input = new String[10];
-		this.student = new Student();
+		//this.input = new String[10];
+		//this.student = new Student();
+		centerText("Re-enter information now: \n");
 	    } else {
 		centerText("Invalid input. Please type 'y' or 'n'.\n");
 	    }
