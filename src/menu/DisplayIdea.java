@@ -18,7 +18,7 @@ public class DisplayIdea extends Menu {
         
         // Add menu options
         addItem("Edit Idea", this::editIdea);
-        addItem("Sell Idea", this::deleteIdea);
+        addItem("Delete Idea", this::deleteIdea);
         addItem("Quit", this::quit);
     }
 
