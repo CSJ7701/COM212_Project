@@ -3,6 +3,9 @@ package menu;
 import idea.Idea;
 import idea.IdeaHeap;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class DisplayIdea extends Menu {
     private Idea idea;
     private IdeaHeap ideaHeap;
@@ -19,29 +22,42 @@ public class DisplayIdea extends Menu {
         addItem("Quit", this::quit);
     }
 
+    public DisplayIdea(Idea idea, IdeaHeap ideaHeap, boolean best) {
+	super();
+        this.idea = idea;
+        this.ideaHeap = ideaHeap;
+	setTopText("Viewing Idea ID: " + idea.getID());
+        
+        // Add menu options
+        addItem("Edit Idea", this::editIdea);
+        addItem("Delete Idea", this::deleteIdea);
+	addItem("Sell This Idea", this::sellIdea);
+	addItem("Quit", this::quit);
+    }
+
     @Override
     protected void displayMenu() {
         clearScreen();
         printBorder();
 
         // Display the idea details
-        centerText("Idea Details:");
+        centerText("Idea Details\n");
         System.out.println();
-        centerText("ID: " + idea.getID());
+        centerText("\033[33mID: \033[0m" + idea.getID());
         System.out.println();
-	centerText("Submitter SSN: " + idea.getSubmitterSSN());
+	centerText("\033[33mSubmitter SSN: \033[0m" + idea.getSubmitterSSN());
         System.out.println();
-	centerText("Description: \n");
-	centerText(idea.getDescription());
+	centerText("\033[33mDescription: \n\033[0m");
+	centerText(idea.getDescription(), true);
         System.out.println();
-	centerText("Rating: " + idea.getRating());
+	centerText("\033[33mRating: \033[0m" + idea.getRating());
 	System.out.println("\n");
-	centerText("---");
+	printBorder();
 	System.out.println("\n");
         
         printItems();
         printBorder();
-        centerText("Enter your choice: ");
+        centerText("\033[32mEnter your choice: \033[0m");
     }
 
     private void editIdea() {
@@ -81,21 +97,62 @@ public class DisplayIdea extends Menu {
     private void deleteIdea() {
         clearScreen();
 	System.out.println("\n");
-	centerText("===================\n\n");
+	printBorder();
         centerText("Are you sure you want to delete this idea? (yes/no): ");
         String confirmation = scanner.nextLine();
         if (confirmation.equalsIgnoreCase("yes")) {
 	    ideaHeap.delete(idea.getID()); // Call the delete method on the heap
 	    System.out.println("\n");
-	    centerText("===================\n\n");
+	    printBorder();
             centerText("Idea deleted. Press enter to exit.");
             scanner.nextLine();
             quit(); // Exit the menu
         } else {
 	    System.out.println("\n");
-	    centerText("===================\n\n");
+		printBorder();
             centerText("Deletion canceled. Press enter to return to menu.");
             scanner.nextLine();
         }
+    }
+
+    private void sellIdea() {
+	clearScreen();
+	System.out.println("\n");
+	printBorder();
+	centerText("Are you sure you want to sell this idea?");
+	centerText("This will delete the idea (yes/no): ");
+	String confirmation = scanner.nextLine();
+	if (confirmation.equalsIgnoreCase("yes")) {
+	    ideaHeap.delete(idea.getID()); // Call the delete method on the heap
+	    System.out.println("\n");
+	    String fileName = "Exports/IdeaWriteup_" + idea.getID() + ".txt";
+	    printBorder();
+	    centerText("Idea has been sold.");
+	    centerText("Idea writeup written to " + fileName + "Press enter to exit.");
+	    exportIdea(this.idea, fileName);
+	    scanner.nextLine();
+	    quit(); // Exit the menu
+	} else {
+	    System.out.println("\n");
+	    printBorder();
+	    centerText("Deletion canceled. Press enter to return to menu.");
+	    scanner.nextLine();
+	}
+    }
+
+    private void exportIdea(Idea idea, String fileName) {
+	try (FileWriter writer = new FileWriter(fileName)) {
+	    writer.write("Idea Writeup\n");
+	    writer.write("=================\n");
+	    writer.write("Submitter's SSN: " + idea.getSubmitterSSN() + "\n");
+	    writer.write("Idea ID: " + idea.getID() + "\n");
+	    writer.write("Description: " + idea.getDescription() + "\n");
+	    writer.write("Rating: " + idea.getRating() + "\n");
+	    writer.write("=====================\n");
+	    writer.write("Thank you for purchasing this idea!\n");
+	} catch (IOException e) {
+	    System.err.println("Error writing to file: " + e.getMessage());
+	}
+
     }
 }

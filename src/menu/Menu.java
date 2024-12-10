@@ -58,7 +58,7 @@ public class Menu {
 
 	printBorder();
 	// centerText("Enter your choice: ");
-	centerText("\033[32m Enter your choice: \033[0m"); // output text in green
+	centerText("\033[32mEnter your choice:\033[0m "); // output text in green
     }
 
     protected void handleInput() {
@@ -109,9 +109,34 @@ public class Menu {
 	System.out.println("\033[34m=\033[0m".repeat(this.width));
     }
 
+    // Center text variant for short strings of text
+    // Does not wrap lines
     protected void centerText(String text) {
 	int padding = (this.width - text.length()) / 2;
-	System.out.print(" ".repeat(Math.max(padding,0)) + text);
+	System.out.print(" ".repeat(Math.max(padding, 0)) + text);
+    }
+
+    // Center text variant intended for long strings
+    // Wraps lines based on the menu width.
+    // Causes issues with formatting strings though.
+    protected void centerText(String text, boolean limit) {
+	int maxLineWidth = this.width - 2;
+	String[] words = text.split(" ");
+	StringBuilder line = new StringBuilder();
+	for (String word : words) {
+	    if (line.length() + word.length() + 8 > maxLineWidth) {
+		// Print the current line centered
+		centerText(line.toString() + "\n");
+		line.setLength(0);
+	    }
+	    line.append(word).append(" ");
+	}
+	// Print the last line, if there's remaining content.
+	if (line.length() > 0) {
+	    int padding = (this.width - line.length()) / 2;
+	    System.out.println(" ".repeat(Math.max(padding, 0)) + line.toString().trim());
+	}
+	
     }
 
     protected void exit() {

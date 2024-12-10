@@ -56,7 +56,7 @@ public class AddIdeaMenu extends Menu {
 		} else {
 		    info = "Not Set...\n";
 		}
-		centerText((i+1) + ". " + items[i].getPrompt() + info);
+		centerText((i+1) + ". " + items[i].getPrompt() + info, true);
 	    }
 	}
     }
