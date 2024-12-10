@@ -15,7 +15,7 @@ public class DisplayIdea extends Menu {
         
         // Add menu options
         addItem("Edit Idea", this::editIdea);
-        addItem("Delete Idea", this::deleteIdea);
+        addItem("Sell Idea", this::deleteIdea);
         addItem("Quit", this::quit);
     }
 
@@ -82,19 +82,19 @@ public class DisplayIdea extends Menu {
         clearScreen();
 	System.out.println("\n");
 	centerText("===================\n\n");
-        centerText("Are you sure you want to delete this idea? (yes/no): ");
+        centerText("Are you sure you want to sell this idea? (yes/no): ");
         String confirmation = scanner.nextLine();
         if (confirmation.equalsIgnoreCase("yes")) {
 	    ideaHeap.delete(idea.getID()); // Call the delete method on the heap
 	    System.out.println("\n");
 	    centerText("===================\n\n");
-            centerText("Idea deleted. Press enter to exit.");
+            centerText("Idea sold. Press enter to exit.");
             scanner.nextLine();
             quit(); // Exit the menu
         } else {
 	    System.out.println("\n");
 	    centerText("===================\n\n");
-            centerText("Deletion canceled. Press enter to return to menu.");
+            centerText("Sell canceled. Press enter to return to menu.");
             scanner.nextLine();
         }
     }
