@@ -6,14 +6,13 @@ import menu.DisplayIdea;
 
 public class searchIdeasMenu extends Menu {
     private IdeaHeap ideaHeap;
-    private int searchID;
     protected Query items;
     private Idea idea;
 
     public searchIdeasMenu(IdeaHeap ideaHeap) {
         this.ideaHeap = ideaHeap;
 	this.items = new Query("ID: ", this, "searchID");
-        setTopText("Search Ideas by ID\nEnter an ID to find the corresponding idea.");
+	setTopText("Search Ideas by ID\n\nYou may search for an idea by its numerical ID here.\nIds are assigned automatically when ideas are created.\n\nIf you do not know the ID\nfor the idea you want, locate the student\nwho created it instead.\n");
     }
 
     @Override

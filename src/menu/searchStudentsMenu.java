@@ -16,7 +16,7 @@ public class searchStudentsMenu extends Menu {
 	this.SSNbst = ssnbst;
 	this.IDbst = idbst;
 	this.ideaHeap = ideaHeap;
-	setTopText("Search for a student.\nCan search using SSN or Student ID.");
+	setTopText("Search for a student.\n\nYou may search using an SSN or Student ID.\n\nPlease make a selection below.\n");
 	addItem("Search with SSN", this::searchSSN);
 	addItem("Search with ID", this::searchID);
     }

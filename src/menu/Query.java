@@ -60,8 +60,9 @@ public class Query {
 		    break;
 		}
 	    } else {
-		System.out.println("Invalid input. Please try again");
+		// System.out.println("Invalid input. Please try again");
 	    }
+	    scanner.close();
 	}
     }
 
@@ -94,7 +95,7 @@ public class Query {
 		return false;
 	    }
 	} else {
-	    System.out.println("Invalid input. Please try again");
+	    //System.out.println("Invalid input. Please try again");
 	    return false;
 	}
     }
