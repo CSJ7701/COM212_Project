@@ -24,7 +24,10 @@ public class IdeaQueue implements java.io.Serializable{
     }
   
     //enqueue method
-    public void enqueue(Idea x){
+    public void enqueue(Idea x) {
+	if (n == 10) {
+	    dequeue();
+	}
         int tail = (front + n) % 10;
         ideaQ[tail] = x;
         n = n + 1;
