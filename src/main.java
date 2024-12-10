@@ -40,6 +40,8 @@ public class main {
 	    this.SSNbst = new SSNBST();
 	    this.idea_count = this.ideaHeap.length();
 	    this.initialized = true;
+
+		// [wip] should pre-load starting data if uninitialized on start-up
 	}
 	this.menu = new Menu(); // Initialize the menu object
 	String text = "Welcome.\n";
