@@ -3,8 +3,11 @@ package menu;
 import idea.Idea;
 import idea.IdeaHeap;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DisplayIdea extends Menu {
     private Idea idea;
@@ -119,17 +122,18 @@ public class DisplayIdea extends Menu {
 	clearScreen();
 	System.out.println("\n");
 	printBorder();
-	centerText("Are you sure you want to sell this idea?");
+	centerText("Are you sure you want to sell this idea?\n");
 	centerText("This will delete the idea (yes/no): ");
 	String confirmation = scanner.nextLine();
 	if (confirmation.equalsIgnoreCase("yes")) {
 	    ideaHeap.delete(idea.getID()); // Call the delete method on the heap
 	    System.out.println("\n");
-	    String fileName = "Exports/IdeaWriteup_" + idea.getID() + ".txt";
+	    String fileName = "IdeaWriteup_" + idea.getID();
 	    printBorder();
-	    centerText("Idea has been sold.");
-	    centerText("Idea writeup written to " + fileName + "Press enter to exit.");
-	    exportIdea(this.idea, fileName);
+	    centerText("Idea has been sold.\n");
+	    String finalFileName = exportIdea(this.idea, fileName);
+	    centerText("Idea writeup written to " + finalFileName + "\n");
+	    centerText("Press enter to exit.\n");
 	    scanner.nextLine();
 	    quit(); // Exit the menu
 	} else {
@@ -140,19 +144,50 @@ public class DisplayIdea extends Menu {
 	}
     }
 
-    private void exportIdea(Idea idea, String fileName) {
-	try (FileWriter writer = new FileWriter(fileName)) {
-	    writer.write("Idea Writeup\n");
-	    writer.write("=================\n");
-	    writer.write("Submitter's SSN: " + idea.getSubmitterSSN() + "\n");
-	    writer.write("Idea ID: " + idea.getID() + "\n");
-	    writer.write("Description: " + idea.getDescription() + "\n");
-	    writer.write("Rating: " + idea.getRating() + "\n");
-	    writer.write("=====================\n");
-	    writer.write("Thank you for purchasing this idea!\n");
+    private String exportIdea(Idea idea, String fileNamePrefix) {
+	try {
+	    // Ensure directory exists
+	    File directory = new File("Exports");
+	    if (!directory.exists()) {
+		if (directory.mkdir()) {
+		    // There would normally be some sort of success message here
+		    // But we aren't using logs
+		} else {
+		    System.err.print("Failed to create directory 'Exports'.");
+		    return "";
+		}
+	    }
+
+	    // Get timestamp
+	    LocalDateTime now = LocalDateTime.now();
+	    DateTimeFormatter fileFormatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+	    String timestamp = now.format(fileFormatter);
+
+	    // Create full file name with timestamp
+	    String fileName = "Exports/" + fileNamePrefix + "_" + timestamp + ".txt";
+
+	    // Prepare a timestamp for the summary
+	    DateTimeFormatter summaryFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	    String summaryTimestamp = now.format(summaryFormatter);
+	    
+	    try (FileWriter writer = new FileWriter(fileName)) {
+		writer.write("Idea Writeup\n");
+		writer.write("=================\n");
+		writer.write("Submitter's SSN: " + idea.getSubmitterSSN() + "\n");
+		writer.write("Idea ID: " + idea.getID() + "\n");
+		writer.write("Description: " + idea.getDescription() + "\n");
+		writer.write("Rating: " + idea.getRating() + "\n");
+		writer.write("Exported on: " + summaryTimestamp + "\n");
+		writer.write("=====================\n");
+		writer.write("Thank you for purchasing this idea!\n");
+		return fileName;
+	    }
 	} catch (IOException e) {
 	    System.err.println("Error writing to file: " + e.getMessage());
 	}
+	return "";
 
     }
+
+    
 }
