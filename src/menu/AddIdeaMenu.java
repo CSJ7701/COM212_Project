@@ -17,7 +17,7 @@ public class AddIdeaMenu extends Menu {
 	this.itemCount = 0;
 	this.idea = new Idea();
 	String descriptionRegex = ".{20,}"; // Checks whether the description is 20 chars or longer
-	addItem("\033[33mLast four digits of Student's SSN: \033[0m", this.idea, "submittersSSN");
+	addItem("\033[33mStudent's SSN: \033[0m", this.idea, "submittersSSN");
 	addItem("\033[33mDescription: \033[0m", this.idea, "ideaDescription", descriptionRegex, "Description must be at least 20 characters.");
 	addItem("\033[33mRating: \033[0m", this.idea, "ideaRating");
     }
