@@ -98,6 +98,15 @@ public class DisplayIdea extends Menu {
     }
 
     private void deleteIdea() {
+	if (ideaHeap.find(idea.getID()) != null) {
+	    System.out.println("\n");
+	    printBorder();
+	    centerText("This idea has already been deleted.\n");
+	    centerText("Press enter to return to the menu.");
+	    scanner.nextLine();
+	    quit();
+	    return;
+	}
         clearScreen();
 	System.out.println("\n");
 	printBorder();
