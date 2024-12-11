@@ -57,8 +57,9 @@ public class Menu {
 	printItems();
 
 	printBorder();
-	// centerText("Enter your choice: ");
-	centerText("\033[32mEnter your choice:\033[0m "); // output text in green
+	String color = "\033[32m"; // green
+	String reset_color = "\033[0m";
+	centerText(color + "Enter your choice: " + reset_color); // output text in green
     }
 
     protected void handleInput() {
@@ -94,7 +95,17 @@ public class Menu {
     protected void printItems() {
 	for (int i=0; i<=this.itemCount; i++) {
 	    if (items[i] != null) {
-		centerText((i+1) + ". " + items[i].getLabel() + "\n");
+			String color;
+			String reset_color = "\033[0m";
+			if (i + 1 == 7) {
+				color = "\033[31m"; // red
+				centerText(color + (i + 1) + ". " + items[i].getLabel() + reset_color + "\n");
+			} else {
+				color = "\033[36m"; // cyan
+				centerText(color + (i + 1) + ". " + reset_color + items[i].getLabel() + "\n");
+			}
+			
+			
 	    }
 	}
     }
