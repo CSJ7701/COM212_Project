@@ -125,7 +125,7 @@ public class main {
 		idea_count = this.ideaHeap.length();
 		initialized = true;
 	}
-	
+
 	this.menu = new Menu(); // Initialize the menu object
 	String text = "\n\nWelcome to the Student Idea Management System.\nPlease select an option...\n\n";
 	this.menu.setTopText(text); // Set the top section text
