@@ -3,6 +3,7 @@ package idea;
 public class IdeaHeap implements java.io.Serializable{
     private Idea[] heap = new Idea[120];
     private int n = 0;
+    private int ideaCount = 0;
     
     //isEmptySet function
     public boolean isEmptySet(){
@@ -20,6 +21,12 @@ public class IdeaHeap implements java.io.Serializable{
 
     public Idea getMax() {
 	return heap[0];
+    }
+
+    public int getIdeaCount() {
+	int temp = this.ideaCount;
+	this.ideaCount++;
+	return temp;
     }
 
         // Find function

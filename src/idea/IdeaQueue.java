@@ -33,6 +33,34 @@ public class IdeaQueue implements java.io.Serializable{
         n = n + 1;
     }
 
+    public void delete(int id) { // Runs in O(n) time...
+	// Find the index of the idea with the matching ID
+	int indexToDelete = -1;
+	for (int i = 0; i < n; i++) {
+	    int actualIndex = (front + i) % 10;
+	    if (ideaQ[actualIndex].getID() == id) {
+		indexToDelete = actualIndex;
+		break;
+	    }
+	}
+
+	// If not found, return
+	if (indexToDelete == -1) {
+	    System.out.println("ID not found in the queue.");
+	    return;
+	}
+
+	// Shift elements to remove the idea
+	for (int i = indexToDelete; i != (front + n - 1) % 10; i = (i + 1) % 10) {
+	    ideaQ[i] = ideaQ[(i + 1) % 10];
+	}
+
+	// Decrement n and update the tail
+	n--;
+	ideaQ[(front + n) % 10] = null; // Clear the last element
+    }
+
+
     // returns # of ideas in IdeaQueue
     public int getSize() {
         return n;
