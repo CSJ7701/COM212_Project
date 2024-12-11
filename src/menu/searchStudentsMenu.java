@@ -23,7 +23,7 @@ public class searchStudentsMenu extends Menu {
 
     
     private void searchSSN() {
-	centerText("Please enter the last four SSN digits: ");
+	centerText("Please enter SSN: ");
 	String input = scanner.nextLine();
 	try {
 	    int ssn = Integer.parseInt(input);

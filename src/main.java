@@ -41,66 +41,91 @@ public class main {
 	//         Say we have a "ideaHeap.???" file where we have serialized our ideaHeap structure.
 	//         This would check whether "ideaHeap.???" exists, and if it does, load its data to IdeaHeap temp = *loaded_data*.
 	//         We could then set this.ideaHeap = temp;.
+
+	if (initialized != true){
+	//Load ideaHeap
+		try{
+			FileInputStream ideaHeapFile = new FileInputStream("ideaHeap.ser");
+			ObjectInputStream ideaHeapIn = new ObjectInputStream(ideaHeapFile);
+			ideaHeap = (IdeaHeap)ideaHeapIn.readObject();
+			ideaHeapIn.close();
+			ideaHeapFile.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
+		}
 	
-	try {
-	    //Path to the directory where serialized files are stored
-	    // vvv (Not sure if this path will be correct...)
-	    String serDataDirectory = "COM212_Project/serialized-files/";
-        
-	    // Check and load ideaHeap
-	    File ideaHeapFile = new File(serDataDirectory + "ideaHeap.ser");
-	    if (ideaHeapFile.exists()) {
-		try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ideaHeapFile))) {
-		    IdeaHeap tempHeap = (IdeaHeap) objIS.readObject();
-		    this.ideaHeap = tempHeap;
-		}
-	    }
 
-	    // Check and load ideaHash
-	    File ideaHashFile = new File(serDataDirectory + "ideaHash.ser");
-	    if (ideaHashFile.exists()) {
-		try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ideaHashFile))) {
-		    IdeaSCHash tempHash = (IdeaSCHash) objIS.readObject();
-		    this.ideaHash = tempHash;
+		// Load ideaHash
+		try{
+			FileInputStream ideaHashFile = new FileInputStream("ideaHash.ser");
+			ObjectInputStream ideaHashIn = new ObjectInputStream(ideaHashFile);
+			ideaHash = (IdeaSCHash)ideaHashIn.readObject();
+			ideaHashIn.close();
+			ideaHashFile.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
 		}
-	    }
 
-	    // Check and load IDbst
-	    File idBstFile = new File(serDataDirectory + "IDbst.ser");
-	    if (idBstFile.exists()) {
-		try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(idBstFile))) {
-		    IDBST tempIDBst = (IDBST) objIS.readObject();
-		    this.IDbst = tempIDBst;
+
+		//Load IDbst
+		try{
+			FileInputStream IDBSTFile = new FileInputStream("IDBST.ser");
+			ObjectInputStream IDBSTIn = new ObjectInputStream(IDBSTFile);
+			IDbst = (IDBST)IDBSTIn.readObject();
+			IDBSTIn.close();
+			IDBSTFile.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
 		}
-	    }
 
-	    // Check and load SSNbst
-	    File ssnBstFile = new File(serDataDirectory + "SSNbst.ser");
-	    if (ssnBstFile.exists()) {
-		try (ObjectInputStream objIS = new ObjectInputStream(new FileInputStream(ssnBstFile))) {
-		    SSNBST tempSSNBst = (SSNBST) objIS.readObject();
-		    this.SSNbst = tempSSNBst;
+		//Load SSNbst
+		try{
+			FileInputStream SSNBSTFile = new FileInputStream("SSNBST.ser");
+			ObjectInputStream SSNBSTIn = new ObjectInputStream(SSNBSTFile);
+			SSNbst = (SSNBST)SSNBSTIn.readObject();
+			SSNBSTIn.close();
+			SSNBSTFile.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
 		}
-	    }
 
-	    // After loading, set initialized to true if all objects are successfully loaded
-	    this.initialized = (this.ideaHeap != null && this.ideaHash != null && this.IDbst != null && this.SSNbst != null);
-	} catch (IOException | ClassNotFoundException e) {
-	    // Handle exceptions (e.g., file not found, deserialization errors)
-	    System.err.println("Error loading serialized data: " + e.getMessage());
-	    e.printStackTrace();
+		// If Serialized files are empty
+		if (ideaHeap == null){
+			ideaHeap = new IdeaHeap();
+		}
+
+		if (ideaHash == null){
+			ideaHash = new IdeaSCHash();
+		}
+
+		if (IDbst == null){
+			IDbst = new IDBST();
+		}
+
+		if (SSNbst == null){
+			SSNbst = new SSNBST();
+		}
+		//Finalize intializations 
+		idea_count = this.ideaHeap.length();
+		initialized = true;
 	}
-
-
-	// This will be dependent on where/how we end up serializing our structures.
-	if (this.initialized != true) {
-	    this.ideaHeap = new IdeaHeap();
-	    this.ideaHash = new IdeaSCHash();
-	    this.IDbst = new IDBST();
-	    this.SSNbst = new SSNBST();
-	    this.idea_count = this.ideaHeap.length();
-	    this.initialized = true;
-	}
+	
 	this.menu = new Menu(); // Initialize the menu object
 	String text = "\n\nWelcome to the Student Idea Management System.\nPlease select an option...\n\n";
 	this.menu.setTopText(text); // Set the top section text
@@ -112,7 +137,7 @@ public class main {
 	this.menu.addItem("Search Ideas", this::searchIdeasOpen);
 	this.menu.addItem("List All Students", this::listStudentsOpen);
 	this.menu.addItem("Get Best Idea", this::bestIdeaOpen);
-	this.menu.addItem("Exit", menu::quit);
+	this.menu.addItem("Exit", this::exitAndSave);
         // Start the menu loop
         this.menu.start();
     }
@@ -187,6 +212,66 @@ public class main {
 	    runMenu();
 	}
     }
+
+	private void exitAndSave(){
+        
+	    // Save ideaHeap
+		try{
+	    	FileOutputStream ideaHeapFile = new FileOutputStream("ideaHeap.ser");
+			ObjectOutputStream ideaHeapOut = new ObjectOutputStream(ideaHeapFile);
+			ideaHeapOut.writeObject(ideaHeap);
+			ideaHeapOut.close();
+			ideaHeapFile.close();
+		} catch (FileNotFoundException e){
+				System.out.println("Error: " + e);
+		} catch (IOException e){
+				System.out.println("Error: " + e);
+		}
+		
+
+	    // Save ideaHash
+		try{
+			FileOutputStream ideaHashFile = new FileOutputStream("ideaHash.ser");
+			ObjectOutputStream ideaHashOut = new ObjectOutputStream(ideaHashFile);
+			ideaHashOut.writeObject(ideaHash);
+			ideaHashOut.close();
+			ideaHashFile.close();
+		} catch (FileNotFoundException e){
+				System.out.println("Error: " + e);
+		} catch (IOException e){
+				System.out.println("Error: " + e);
+		}
+	
+
+	    // Save IDbst
+		try{
+			FileOutputStream IDBSTFile = new FileOutputStream("IDBST.ser");
+			ObjectOutputStream IDBSTOut = new ObjectOutputStream(IDBSTFile);
+			IDBSTOut.writeObject(IDbst);
+			IDBSTOut.close();
+			IDBSTFile.close();
+		} catch (FileNotFoundException e){
+				System.out.println("Error: " + e);
+		} catch (IOException e){
+				System.out.println("Error: " + e);
+		}
+
+	    //Save SSNbst
+	    try{
+			FileOutputStream SSNBSTFile = new FileOutputStream("SSNBST.ser");
+			ObjectOutputStream SSNBSTOut = new ObjectOutputStream(SSNBSTFile);
+			SSNBSTOut.writeObject(SSNbst);
+			SSNBSTOut.close();
+			SSNBSTFile.close();
+		} catch (FileNotFoundException e){
+				System.out.println("Error: " + e);
+		} catch (IOException e){
+				System.out.println("Error: " + e);
+		}
+
+			menu.quit();
+
+	}
 
     // Utility Functions
     
