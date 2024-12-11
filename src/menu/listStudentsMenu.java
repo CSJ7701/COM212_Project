@@ -86,7 +86,7 @@ public class listStudentsMenu extends Menu {
 	    setTopText("\n\033[31mThere are no students to select.\033[0m\n");
 	    return;
 	}
-	centerText("Enter the idea number to select: ");
+	centerText("Enter the number listed BEFORE ID number to select: ");
 	String input = scanner.nextLine();
 	try {
 	    int studentIndex = Integer.parseInt(input)-1;

@@ -1,10 +1,17 @@
 package student;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import idea.Idea;
+import idea.IdeaHeap;
 import idea.IdeaQueue;
 
 public class Student implements java.io.Serializable{
@@ -96,12 +103,55 @@ public class Student implements java.io.Serializable{
     }
 
     public IdeaQueue getIdeas() {
+        try{
+			FileInputStream studentQ = new FileInputStream(ID + "studentQ.ser");
+			ObjectInputStream studentQIn = new ObjectInputStream(studentQ);
+			ideas = (IdeaQueue)studentQIn.readObject();
+			studentQIn.close();
+			studentQ.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
+		}
+
         return ideas;
+
     }
 
     public void addIdea(Idea x) {
+        try{
+			FileInputStream studentQ = new FileInputStream(ID + "studentQ.ser");
+			ObjectInputStream studentQIn = new ObjectInputStream(studentQ);
+			ideas = (IdeaQueue)studentQIn.readObject();
+			studentQIn.close();
+			studentQ.close();
+		} catch (FileNotFoundException e){
+			System.out.println("Error: " + e);
+		} catch (IOException e){
+			System.out.println("Error: " + e);
+		} catch (ClassNotFoundException e){
+			System.out.println("Error: " + e);
+		}
+
         ideas.enqueue(x);
         recalculateAvgRating();
+
+        try{
+	    	FileOutputStream studentQ = new FileOutputStream(ID + "studentQ.ser");
+			ObjectOutputStream studentQOut = new ObjectOutputStream(studentQ);
+			studentQOut.writeObject(ideas);
+			studentQOut.close();
+			studentQ.close();
+		} catch (FileNotFoundException e){
+				System.out.println("Error: " + e);
+		} catch (IOException e){
+				System.out.println("Error: " + e);
+		}
+
+
     }
 
     public double getAvgRating() {

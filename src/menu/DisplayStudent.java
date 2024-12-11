@@ -23,7 +23,7 @@ public class DisplayStudent extends Menu {
 	// Add menu options
 	addItem("Edit Student", this::editStudent);
 	addItem("Delete Student", this::deleteStudent);
-	addItem("Browse This Student's Ideas", this::browseIdeas);
+	addItem("Student's Last 10 Ideas", this::browseIdeas);
 	addItem("Quit", this::quit);
     }
 
@@ -57,13 +57,7 @@ public class DisplayStudent extends Menu {
     }
 
     private double avgIdeaScore() {
-	IdeaQueue ideas = this.student.getIdeas();
-	int n = ideas.getSize();
-	double sum = 0;
-	for (int i = 0; i < n; i++) {
-	    sum += (double) ideas.get(i).getRating();
-	}
-	return sum / n;
+		return student.getAvgRating();
     }
 	
 
