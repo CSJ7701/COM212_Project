@@ -137,7 +137,7 @@ public class Student implements java.io.Serializable{
 		}
 
         ideas.enqueue(x);
-        recalculateAvgRating();
+        avgRating = recalculateAvgRating();
 
         try{
 	    	FileOutputStream studentQ = new FileOutputStream(ID + "studentQ.ser");
@@ -159,7 +159,7 @@ public class Student implements java.io.Serializable{
     }
 
     // Helper method to recalc the avg (use when idea adding/amount is updated)
-    public void recalculateAvgRating() {
+    public double recalculateAvgRating() {
         double total = 0.0;
         int count = 0;
 
@@ -173,6 +173,7 @@ public class Student implements java.io.Serializable{
         }
         // Ternary operator to calc avg rating & avoid division by 0
         this.avgRating = (ideas.isEmpty()) ? 0.0 : total / ideas.getSize();
+        return avgRating;
     }
 
 }

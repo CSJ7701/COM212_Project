@@ -39,7 +39,7 @@ public class DisplayStudent extends Menu {
 	centerText("Email: " + student.getEmail() + "\n");
 	centerText("SSN: " + student.getSSN() + "\n");
 	centerText("Student ID: " + student.getID() + "\n");
-	centerText("Average Idea Score: " + avgIdeaScore() + "\n");
+	centerText("Average Idea Score: " + student.recalculateAvgRating() + "\n");
 	System.out.println("\n");
 	centerText(" --- ");
 	System.out.println("\n");
