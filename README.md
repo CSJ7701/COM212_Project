@@ -66,6 +66,3 @@ For recent commits, visit the [commit history](https://github.com/CSJ7701/COM212
 ## Issues and Discussions
 To view or participate in discussions, check out the [discussions page](https://github.com/CSJ7701/COM212_Project/discussions).
 For any issues, visit the [issues page](https://github.com/CSJ7701/COM212_Project/issues).
-
-## License
-[Add a License? GPL3+ probably...]
