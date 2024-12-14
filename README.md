@@ -43,6 +43,10 @@ To set up this project locally, follow these steps:
 - **List All Student Records**: Show a list of all student records, sorted by their Student ID. Allows the user to select a student and see more information.
 - **Retrieve/Sell Best Idea**: Show information about the best idea from the pool of available ideas. Also provides the option to 'sell' the idea.
 
+When you choose to 'sell' an idea, a brief writeup of that idea is exported to the 'Exports' directory.
+
+This system saves '.ser' files to the project root - these are serialized data storage files. Deleting these will cause data loss, and may cause unexpected issues, since the data in these files interacts with each other.
+
 ## Contribution Guidelines
 We welcome contributions! To contribute to this project, follow these steps:
 1. Fork the repository.
