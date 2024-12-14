@@ -70,7 +70,7 @@ public class studentIdeasMenu extends Menu {
 	}
     }
 
-    private void selectIdea() {
+    private void selectIdea() { // Incorporates pages, lets you choose an idea from list
 	if (this.ideas == null) {
 	    setTopText("\n\033[31mThere are no ideas to select.\033[0m\n");
 	    return;

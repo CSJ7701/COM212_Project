@@ -55,7 +55,7 @@ public class AddStudentMenu extends Menu {
     }
 
     @Override
-    protected void printItems() {
+    protected void printItems() {  // Print the menu options
 	for (int i=0; i<this.itemCount; i++) {
 	    if (items[i] != null) {
 		String info = "";
@@ -70,7 +70,7 @@ public class AddStudentMenu extends Menu {
     }
 
     @Override
-    protected void displayMenu() {
+    protected void displayMenu() { // Wrapper for all display methods
 	clearScreen();
 	printBorder();
 
@@ -112,7 +112,6 @@ public class AddStudentMenu extends Menu {
 		}
 	    }
 	    
-	    //	    while (true) {
 	    clearScreen();
 	    displayMenu();
 
@@ -124,8 +123,6 @@ public class AddStudentMenu extends Menu {
 		quit();
 		return;
 	    } else if (confirmation.equals("n")) {
-		//this.input = new String[10];
-		//this.student = new Student();
 		centerText("Re-enter information now: \n");
 	    } else {
 		centerText("Invalid input. Please type 'y' or 'n'.\n");

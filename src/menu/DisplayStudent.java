@@ -57,7 +57,7 @@ public class DisplayStudent extends Menu {
     }
 
     private double avgIdeaScore() {
-		return student.getAvgRating();
+	return student.getAvgRating();
     }
 	
 

@@ -34,96 +34,89 @@ public class main {
 
     // Method to initialize and start the menu
     private void runMenu() {
-	// TODO load serialized data.
-	// 'IF file with *name* exists, load file as *variable*, and set *this.variable* = *variable*
-	// Example situation:
-	//         We could end up saving serialized data to the *project_name*/data directory.
-	//         Say we have a "ideaHeap.???" file where we have serialized our ideaHeap structure.
-	//         This would check whether "ideaHeap.???" exists, and if it does, load its data to IdeaHeap temp = *loaded_data*.
-	//         We could then set this.ideaHeap = temp;.
 
 	if (initialized != true){
-	//Load ideaHeap
-		try{
-			FileInputStream ideaHeapFile = new FileInputStream("ideaHeap.ser");
-			ObjectInputStream ideaHeapIn = new ObjectInputStream(ideaHeapFile);
-			ideaHeap = (IdeaHeap)ideaHeapIn.readObject();
-			ideaHeapIn.close();
-			ideaHeapFile.close();
-		} catch (FileNotFoundException e){
-			System.out.println("Error: " + e);
-		} catch (IOException e){
-			System.out.println("Error: " + e);
-		} catch (ClassNotFoundException e){
-			System.out.println("Error: " + e);
-		}
+	    //Load ideaHeap
+	    try{
+		FileInputStream ideaHeapFile = new FileInputStream("ideaHeap.ser");
+		ObjectInputStream ideaHeapIn = new ObjectInputStream(ideaHeapFile);
+		ideaHeap = (IdeaHeap)ideaHeapIn.readObject();
+		ideaHeapIn.close();
+		ideaHeapFile.close();
+	    } catch (FileNotFoundException e){
+		System.out.println("Error: " + e);
+	    } catch (IOException e){
+		System.out.println("Error: " + e);
+	    } catch (ClassNotFoundException e){
+		System.out.println("Error: " + e);
+	    }
 	
 
-		// Load ideaHash
-		try{
-			FileInputStream ideaHashFile = new FileInputStream("ideaHash.ser");
-			ObjectInputStream ideaHashIn = new ObjectInputStream(ideaHashFile);
-			ideaHash = (IdeaSCHash)ideaHashIn.readObject();
-			ideaHashIn.close();
-			ideaHashFile.close();
-		} catch (FileNotFoundException e){
-			System.out.println("Error: " + e);
-		} catch (IOException e){
-			System.out.println("Error: " + e);
-		} catch (ClassNotFoundException e){
-			System.out.println("Error: " + e);
-		}
+	    // Load ideaHash
+	    try{
+		FileInputStream ideaHashFile = new FileInputStream("ideaHash.ser");
+		ObjectInputStream ideaHashIn = new ObjectInputStream(ideaHashFile);
+		ideaHash = (IdeaSCHash)ideaHashIn.readObject();
+		ideaHashIn.close();
+		ideaHashFile.close();
+	    } catch (FileNotFoundException e){
+		System.out.println("Error: " + e);
+	    } catch (IOException e){
+		System.out.println("Error: " + e);
+	    } catch (ClassNotFoundException e){
+		System.out.println("Error: " + e);
+	    }
 
 
-		//Load IDbst
-		try{
-			FileInputStream IDBSTFile = new FileInputStream("IDBST.ser");
-			ObjectInputStream IDBSTIn = new ObjectInputStream(IDBSTFile);
-			IDbst = (IDBST)IDBSTIn.readObject();
-			IDBSTIn.close();
-			IDBSTFile.close();
-		} catch (FileNotFoundException e){
-			System.out.println("Error: " + e);
-		} catch (IOException e){
-			System.out.println("Error: " + e);
-		} catch (ClassNotFoundException e){
-			System.out.println("Error: " + e);
-		}
+	    //Load IDbst
+	    try{
+		FileInputStream IDBSTFile = new FileInputStream("IDBST.ser");
+		ObjectInputStream IDBSTIn = new ObjectInputStream(IDBSTFile);
+		IDbst = (IDBST)IDBSTIn.readObject();
+		IDBSTIn.close();
+		IDBSTFile.close();
+	    } catch (FileNotFoundException e){
+		System.out.println("Error: " + e);
+	    } catch (IOException e){
+		System.out.println("Error: " + e);
+	    } catch (ClassNotFoundException e){
+		System.out.println("Error: " + e);
+	    }
 
-		//Load SSNbst
-		try{
-			FileInputStream SSNBSTFile = new FileInputStream("SSNBST.ser");
-			ObjectInputStream SSNBSTIn = new ObjectInputStream(SSNBSTFile);
-			SSNbst = (SSNBST)SSNBSTIn.readObject();
-			SSNBSTIn.close();
-			SSNBSTFile.close();
-		} catch (FileNotFoundException e){
-			System.out.println("Error: " + e);
-		} catch (IOException e){
-			System.out.println("Error: " + e);
-		} catch (ClassNotFoundException e){
-			System.out.println("Error: " + e);
-		}
+	    //Load SSNbst
+	    try{
+		FileInputStream SSNBSTFile = new FileInputStream("SSNBST.ser");
+		ObjectInputStream SSNBSTIn = new ObjectInputStream(SSNBSTFile);
+		SSNbst = (SSNBST)SSNBSTIn.readObject();
+		SSNBSTIn.close();
+		SSNBSTFile.close();
+	    } catch (FileNotFoundException e){
+		System.out.println("Error: " + e);
+	    } catch (IOException e){
+		System.out.println("Error: " + e);
+	    } catch (ClassNotFoundException e){
+		System.out.println("Error: " + e);
+	    }
 
-		// If Serialized files are empty
-		if (ideaHeap == null){
-			ideaHeap = new IdeaHeap();
-		}
+	    // If Serialized files are empty
+	    if (ideaHeap == null){
+		ideaHeap = new IdeaHeap();
+	    }
 
-		if (ideaHash == null){
-			ideaHash = new IdeaSCHash();
-		}
+	    if (ideaHash == null){
+		ideaHash = new IdeaSCHash();
+	    }
 
-		if (IDbst == null){
-			IDbst = new IDBST();
-		}
+	    if (IDbst == null){
+		IDbst = new IDBST();
+	    }
 
-		if (SSNbst == null){
-			SSNbst = new SSNBST();
-		}
-		//Finalize intializations 
-		idea_count = this.ideaHeap.length();
-		initialized = true;
+	    if (SSNbst == null){
+		SSNbst = new SSNBST();
+	    }
+	    //Finalize intializations 
+	    idea_count = this.ideaHeap.length();
+	    initialized = true;
 	}
 
 	this.menu = new Menu(); // Initialize the menu object
@@ -142,59 +135,59 @@ public class main {
         this.menu.start();
     }
 
-    // Submenu Definitions
+    // == Submenu Definitions ==
 
     private void addIdeaOpen() {
         menu.quit();  // Quit the menu
-	AddIdeaMenu addIdea = new AddIdeaMenu(this.SSNbst);
+	AddIdeaMenu addIdea = new AddIdeaMenu(this.SSNbst); // Create an instance of the AddIdeaMenu class
 	String text = "Create a new idea.\nPlease enter details:\n\nSSN should reference the student who created the idea.\nDescription must be at least 20 characters.\nRating must be a number from 0-100, where 0 is poor.\n\n\nType 'EXIT' at any time to terminate this process.\n";
 	addIdea.setTopText(text);
-	addIdea.start();
-	Idea newIdea = addIdea.getIdea();
+	addIdea.start(); // Run the menu
+	Idea newIdea = addIdea.getIdea(); // Get the newly created idea from the menu.
 	if (newIdea != null) {
 	    this.idea_count = this.ideaHeap.getIdeaCount();
-	    newIdea.setID(this.idea_count+1);
-	    Student student = this.SSNbst.search(newIdea.getSubmitterSSN());
-	    student.addIdea(newIdea);
-	    this.ideaHeap.insert(newIdea);
-	    this.ideaHash.insert(newIdea);
+	    newIdea.setID(this.idea_count+1); // Set the idea id
+	    Student student = this.SSNbst.search(newIdea.getSubmitterSSN()); // Get the student who made the idea
+	    student.addIdea(newIdea); // Add the idea to the students queue
+	    this.ideaHeap.insert(newIdea); // Add the idea to the heap
+	    this.ideaHash.insert(newIdea); // Add the idea to the hash table
 	}
-	runMenu();
+	runMenu(); // Run the main menu once the AddIdeaMenu instance closes
     }
 
     private void addStudentOpen() {
-	menu.quit();
-	AddStudentMenu addStudent = new AddStudentMenu(this.SSNbst, this.IDbst);
+	menu.quit(); // Quit the menu
+	AddStudentMenu addStudent = new AddStudentMenu(this.SSNbst, this.IDbst); // Create new menu instance
 	String text = "Create a new student.\nPlease enter details:\n\nName should be the student's last name.\nEmail should be a valid email.\nSSN should be a 4 digit number, unique from other students.\nID should be a 4 digit number, unique from other students.\n\nType 'EXIT' at any time to terminate this process.\n";
 	addStudent.setTopText(text);
-	addStudent.start();
+	addStudent.start(); // Run the addStudent menu
 	Student newStudent = addStudent.getStudent();
 	if (newStudent != null && newStudent.getSSN() != 0) {
-	    this.IDbst.insert(newStudent);
-	    this.SSNbst.insert(newStudent);
+	    this.IDbst.insert(newStudent); // Insert the student into the ID BST
+	    this.SSNbst.insert(newStudent); // Insert the student into the SSN BST
 	}
-	runMenu();
+	runMenu(); // Run the main menu once the student menu closes
     }
 
     private void searchStudentsOpen() {
 	menu.quit();
 	Menu searchStudents = new searchStudentsMenu(this.IDbst, this.SSNbst, this.ideaHeap);
 	searchStudents.addItem("Exit", () -> submenuClose(searchStudents));
-	searchStudents.start();
+	searchStudents.start(); // Start the search menu
 	runMenu();
     }
 
     private void searchIdeasOpen() {
 	menu.quit();
 	Menu searchIdeas = new searchIdeasMenu(this.ideaHeap);
-	searchIdeas.start();
+	searchIdeas.start(); // Start the search menu
 	runMenu();
     }
 
     private void listStudentsOpen() {
 	menu.quit();
 	Menu listStudents = new listStudentsMenu(this.IDbst, this.SSNbst, this.ideaHeap);
-	listStudents.start();
+	listStudents.start(); // Start the list menu
 	runMenu();
     }
 
@@ -205,7 +198,7 @@ public class main {
 	    menu.start();
 	} else {
 	    menu.quit();
-	    // Variant of the DisplayIdea which adds an extra option
+	    // Variant of the DisplayIdea which adds an extra option - 'sell'
 	    // Specified by the extra argument - true
 	    DisplayIdea display = new DisplayIdea(best_idea, this.ideaHeap, true);
 	    display.start();
@@ -213,70 +206,70 @@ public class main {
 	}
     }
 
-	private void exitAndSave(){
+    private void exitAndSave(){
         
-	    // Save ideaHeap
-		try{
-	    	FileOutputStream ideaHeapFile = new FileOutputStream("ideaHeap.ser");
-			ObjectOutputStream ideaHeapOut = new ObjectOutputStream(ideaHeapFile);
-			ideaHeapOut.writeObject(ideaHeap);
-			ideaHeapOut.close();
-			ideaHeapFile.close();
-		} catch (FileNotFoundException e){
-				System.out.println("Error: " + e);
-		} catch (IOException e){
-				System.out.println("Error: " + e);
-		}
+	// Save ideaHeap
+	try{
+	    FileOutputStream ideaHeapFile = new FileOutputStream("ideaHeap.ser");
+	    ObjectOutputStream ideaHeapOut = new ObjectOutputStream(ideaHeapFile);
+	    ideaHeapOut.writeObject(ideaHeap);
+	    ideaHeapOut.close();
+	    ideaHeapFile.close();
+	} catch (FileNotFoundException e){
+	    System.out.println("Error: " + e);
+	} catch (IOException e){
+	    System.out.println("Error: " + e);
+	}
 		
 
-	    // Save ideaHash
-		try{
-			FileOutputStream ideaHashFile = new FileOutputStream("ideaHash.ser");
-			ObjectOutputStream ideaHashOut = new ObjectOutputStream(ideaHashFile);
-			ideaHashOut.writeObject(ideaHash);
-			ideaHashOut.close();
-			ideaHashFile.close();
-		} catch (FileNotFoundException e){
-				System.out.println("Error: " + e);
-		} catch (IOException e){
-				System.out.println("Error: " + e);
-		}
+	// Save ideaHash
+	try{
+	    FileOutputStream ideaHashFile = new FileOutputStream("ideaHash.ser");
+	    ObjectOutputStream ideaHashOut = new ObjectOutputStream(ideaHashFile);
+	    ideaHashOut.writeObject(ideaHash);
+	    ideaHashOut.close();
+	    ideaHashFile.close();
+	} catch (FileNotFoundException e){
+	    System.out.println("Error: " + e);
+	} catch (IOException e){
+	    System.out.println("Error: " + e);
+	}
 	
 
-	    // Save IDbst
-		try{
-			FileOutputStream IDBSTFile = new FileOutputStream("IDBST.ser");
-			ObjectOutputStream IDBSTOut = new ObjectOutputStream(IDBSTFile);
-			IDBSTOut.writeObject(IDbst);
-			IDBSTOut.close();
-			IDBSTFile.close();
-		} catch (FileNotFoundException e){
-				System.out.println("Error: " + e);
-		} catch (IOException e){
-				System.out.println("Error: " + e);
-		}
-
-	    //Save SSNbst
-	    try{
-			FileOutputStream SSNBSTFile = new FileOutputStream("SSNBST.ser");
-			ObjectOutputStream SSNBSTOut = new ObjectOutputStream(SSNBSTFile);
-			SSNBSTOut.writeObject(SSNbst);
-			SSNBSTOut.close();
-			SSNBSTFile.close();
-		} catch (FileNotFoundException e){
-				System.out.println("Error: " + e);
-		} catch (IOException e){
-				System.out.println("Error: " + e);
-		}
-
-			menu.quit();
-
+	// Save IDbst
+	try{
+	    FileOutputStream IDBSTFile = new FileOutputStream("IDBST.ser");
+	    ObjectOutputStream IDBSTOut = new ObjectOutputStream(IDBSTFile);
+	    IDBSTOut.writeObject(IDbst);
+	    IDBSTOut.close();
+	    IDBSTFile.close();
+	} catch (FileNotFoundException e){
+	    System.out.println("Error: " + e);
+	} catch (IOException e){
+	    System.out.println("Error: " + e);
 	}
+
+	//Save SSNbst
+	try{
+	    FileOutputStream SSNBSTFile = new FileOutputStream("SSNBST.ser");
+	    ObjectOutputStream SSNBSTOut = new ObjectOutputStream(SSNBSTFile);
+	    SSNBSTOut.writeObject(SSNbst);
+	    SSNBSTOut.close();
+	    SSNBSTFile.close();
+	} catch (FileNotFoundException e){
+	    System.out.println("Error: " + e);
+	} catch (IOException e){
+	    System.out.println("Error: " + e);
+	}
+
+	menu.quit();
+
+    }
 
     // Utility Functions
     
     private void submenuClose(Menu submenu) {
-	submenu.quit();
+	submenu.quit(); // Quit an arbitrary submenu.
 	runMenu();
     }
 }

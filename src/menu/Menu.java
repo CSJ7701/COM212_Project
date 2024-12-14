@@ -25,7 +25,7 @@ public class Menu {
     }
 
     public void start() {
-	while (this.isRunning) {
+	while (this.isRunning) { // I use a while loop to allow the menu to 'clear', so that the screen doesn't fill up
 	    displayMenu();
 	    handleInput();
 	}
@@ -45,7 +45,7 @@ public class Menu {
 	}
     }
 
-    public void quit() {
+    public void quit() { // Quit the while loop
 	this.isRunning = false;
     }
 
@@ -92,7 +92,7 @@ public class Menu {
 	}
     }
 
-    protected void printItems() {
+    protected void printItems() { // Print the menu items
 	for (int i=0; i<=this.itemCount; i++) {
 	    if (items[i] != null) {
 			String color;
